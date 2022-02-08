@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentFirstBinding;
+import com.daclink.drew.sp22.cst438_project01_starter.db.FragmentFirstBinding;
 
 public class FirstFragment extends Fragment {
 
