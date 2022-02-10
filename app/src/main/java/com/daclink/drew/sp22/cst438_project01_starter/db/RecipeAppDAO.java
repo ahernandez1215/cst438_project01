@@ -6,6 +6,7 @@ import android.speech.RecognitionListener;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @Dao
 public interface RecipeAppDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... users);
 
     @Update
@@ -35,7 +36,7 @@ public interface RecipeAppDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserId = :userId")
     User getUserByUserId(int userId);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Recipe... recipes);
 
     @Update
