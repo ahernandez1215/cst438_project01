@@ -13,3 +13,4 @@ API Description: A free API that allows searching by meal name, id, random meal,
 Learning resources used: <br>
 [Room Tutorial](https://codinginflow.com/tutorials/android/room-viewmodel-livedata-recyclerview-mvvm/part-1-introduction) <br>
 [Another Room tutorial](http://thetechnocafe.com/how-to-use-room-in-android-all-you-need-to-know-to-get-started/)
+[Room Typeconverter for List] (https://medium.com/@toddcookevt/android-room-storing-lists-of-objects-766cca57e3f9)
