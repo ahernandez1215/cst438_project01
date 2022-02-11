@@ -24,6 +24,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -38,6 +44,24 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        MealDB mealDB;
+        Meal meal = new Meal();
+//        private void search(){
+//            mealDB = MealDBClient.createService(MealDB.class);
+//            Call<Meal> call = MealDB.searchMeal(s);
+//            call.enqueue(new Callback<Meal>() {
+//                @Override
+//                public void onResponse(Call<Meal> call, Response<Meal> response) {
+//                    meal.addAll(response.body().get)
+//                }
+//
+//                @Override
+//                public void onFailure(Call<Meal> call, Throwable t) {
+//
+//                }
+//            });
+//        }
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -127,4 +151,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }
