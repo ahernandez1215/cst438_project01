@@ -22,35 +22,35 @@ public class User {
         this.mIsAdmin = mIsAdmin;
     }
 
-    public int getmUserId() {
+    public int getUserId() {
         return mUserId;
     }
 
-    public void setmUserId(int mUserId) {
+    public void setUserId(int mUserId) {
         this.mUserId = mUserId;
     }
 
-    public String getmUsername() {
+    public String getUsername() {
         return mUsername;
     }
 
-    public void setmUsername(String mUsername) {
+    public void setUsername(String mUsername) {
         this.mUsername = mUsername;
     }
 
-    public String getmPassword() {
+    public String getPassword() {
         return mPassword;
     }
 
-    public void setmPassword(String mPassword) {
+    public void setPassword(String mPassword) {
         this.mPassword = mPassword;
     }
 
-    public Boolean getmIsAdmin() {
+    public Boolean getIsAdmin() {
         return mIsAdmin;
     }
 
-    public void setmIsAdmin(Boolean mIsAdmin) {
+    public void setIsAdmin(Boolean mIsAdmin) {
         this.mIsAdmin = mIsAdmin;
     }
 }

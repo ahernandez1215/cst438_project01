@@ -2,6 +2,7 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +13,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
-import com.daclink.drew.sp22.cst438_project01_starter.db.RecipeAppDAO;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,9 +26,11 @@ public class LoginActivity extends AppCompatActivity {
     private String mPassword;
 
     private Button mLoginButton;
-    private RecipeAppDAO mRecipeAppDAO;
+    private AppDatabase mDb;
 
     private User mUser;
+
+    private Executor executor = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +65,20 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = mPasswordField.getText().toString();
     }
 
-    private boolean validPwd() { return mUser.getmPassword().equals(mPassword); }
+    private boolean validPwd() { return mUser.getPassword().equals(mPassword); }
 
     private boolean checkUser() {
-        mUser = mRecipeAppDAO.getUserByUsername(mUsername);
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mUser = mDb.recipeAppDAO().getUserByUsername(mUsername);
+                } catch (Exception e) {
+
+                }
+            }
+        });
 
         if(mUser == null) {
             Toast.makeText(this, "User " + mUsername + " not found ", Toast.LENGTH_SHORT).show();
@@ -75,13 +90,5 @@ public class LoginActivity extends AppCompatActivity {
     public static Intent intentFactory(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         return intent;
-    }
-
-    //May need to change this later. Use LiveData instead!
-    private void getDatabase() {
-        mRecipeAppDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
-                .allowMainThreadQueries()
-                .build()
-                .getRecipeAppDAO();
     }
 }

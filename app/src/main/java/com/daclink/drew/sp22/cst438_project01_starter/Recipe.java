@@ -39,91 +39,91 @@ public class Recipe {
         this.mMeasurements = mMeasurements;
     }
 
-    public int getmRecipeId() {
+    public int getRecipeId() {
         return mRecipeId;
     }
 
-    public void setmRecipeId(int mRecipeId) {
+    public void setRecipeId(int mRecipeId) {
         this.mRecipeId = mRecipeId;
     }
 
-    public int getmApiId() {
+    public int getApiId() {
         return mApiId;
     }
 
-    public void setmApiId(int mApiId) {
+    public void setApiId(int mApiId) {
         this.mApiId = mApiId;
     }
 
-    public String getmName() {
+    public String getName() {
         return mName;
     }
 
-    public void setmName(String mName) {
+    public void setName(String mName) {
         this.mName = mName;
     }
 
-    public String getmCategory() {
+    public String getCategory() {
         return mCategory;
     }
 
-    public void setmCategory(String mCategory) {
+    public void setCategory(String mCategory) {
         this.mCategory = mCategory;
     }
 
-    public String getmArea() {
+    public String getArea() {
         return mArea;
     }
 
-    public void setmArea(String mArea) {
+    public void setArea(String mArea) {
         this.mArea = mArea;
     }
 
-    public String getmInstructions() {
+    public String getInstructions() {
         return mInstructions;
     }
 
-    public void setmInstructions(String mInstructions) {
+    public void setInstructions(String mInstructions) {
         this.mInstructions = mInstructions;
     }
 
-    public String getmThumbnail() {
+    public String getThumbnail() {
         return mThumbnail;
     }
 
-    public void setmThumbnail(String mThumbnail) {
+    public void setThumbnail(String mThumbnail) {
         this.mThumbnail = mThumbnail;
     }
 
-    public String getmTags() {
+    public String getTags() {
         return mTags;
     }
 
-    public void setmTags(String mTags) {
+    public void setTags(String mTags) {
         this.mTags = mTags;
     }
 
-    public String getmYoutube() {
+    public String getYoutube() {
         return mYoutube;
     }
 
-    public void setmYoutube(String mYoutube) {
+    public void setYoutube(String mYoutube) {
         this.mYoutube = mYoutube;
     }
 
-    public List<String> getmIngredients() {
+    public List<String> getIngredients() {
         return mIngredients;
     }
 
-    public void setmIngredients(List<String> mIngredients) {
+    public void setIngredients(List<String> mIngredients) {
         this.mIngredients = mIngredients;
     }
 
-    public List<String> getmMeasurements() {
+    public List<String> getMeasurements() {
         return mMeasurements;
     }
 
-    public void setmMeasurements(List<String> mMeasurements) {
+    public void setMeasurements(List<String> mMeasurements) {
         this.mMeasurements = mMeasurements;
     }
 }
