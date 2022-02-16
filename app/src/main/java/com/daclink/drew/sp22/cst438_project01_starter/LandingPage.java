@@ -42,8 +42,6 @@ public class LandingPage extends AppCompatActivity {
 
         welcomeTextView.setText(String.format("Welcome %s", mUser.getUsername()));
         saveUserPreferences(mUser.getUserId());
-
-
     }
 
     private void saveUserPreferences(int userId) {

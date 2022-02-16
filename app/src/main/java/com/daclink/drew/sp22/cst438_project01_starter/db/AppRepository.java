@@ -34,7 +34,7 @@ public class AppRepository {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mDb.recipeAppDAO().insert(user);
+                mDb.userDAO().insert(user);
             }
         });
     }
@@ -43,7 +43,7 @@ public class AppRepository {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mDb.recipeAppDAO().delete(user); }
+                mDb.userDAO().delete(user); }
         });
     }
 
@@ -52,7 +52,7 @@ public class AppRepository {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mUser[0] = mDb.recipeAppDAO().getUserByUserId(userId);
+                mUser[0] = mDb.userDAO().getUserByUserId(userId);
             }
         });
         return mUser[0];
@@ -63,7 +63,7 @@ public class AppRepository {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mUser[0] = mDb.recipeAppDAO().getUserByUsername(username);
+                mUser[0] = mDb.userDAO().getUserByUsername(username);
             }
         });
         return mUser[0];

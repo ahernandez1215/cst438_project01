@@ -11,7 +11,7 @@ import com.daclink.drew.sp22.cst438_project01_starter.Recipe;
 import com.daclink.drew.sp22.cst438_project01_starter.User;
 import com.daclink.drew.sp22.cst438_project01_starter.db.typeConverters.DataTypeConverters;
 
-@Database(entities = {Recipe.class, User.class}, version = 1)
+@Database(entities = {Recipe.class, User.class}, version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -22,6 +22,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase instance;
     private static final Object LOCK = new Object();
     public abstract RecipeAppDAO recipeAppDAO();
+    public abstract UserDAO userDAO();
 
     public static AppDatabase getInstance(Context context) {
         if(instance == null) {
