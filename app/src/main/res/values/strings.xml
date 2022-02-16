@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CST438_Project01_Starter</string>
+    <string name="app_name">Food Recipe Application</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -28,4 +28,11 @@
     <string name="login_failed">"Login failed"</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="register">Register</string>
+    <string name="welcometv">Welcome</string>
+    <string name="logout">Logout</string>
+    <string name="button">Button</string>
+    <string name="yes" />
+    <string name="yeslogout">yes</string>
+    <string name="nologout">no</string>
+    <string name="no">no</string>
 </resources>

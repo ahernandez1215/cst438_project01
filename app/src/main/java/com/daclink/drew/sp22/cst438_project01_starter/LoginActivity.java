@@ -1,12 +1,8 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
-import com.daclink.drew.sp22.cst438_project01_starter.db.AppRepository;
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDAO;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         connectDisplay();
         initViewModel();
 
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Login");
+
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
                         startActivity(intent);
+                        finish();
                     }
                 }
             }

@@ -4,10 +4,8 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
-import com.daclink.drew.sp22.cst438_project01_starter.R;
-import com.daclink.drew.sp22.cst438_project01_starter.User;
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 
-import java.lang.reflect.Executable;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
@@ -50,8 +48,14 @@ public class AppRepository {
 
     }
 
-    public void deleteUser(User user) {
+    public void updateUser(User user) {
         AppDatabase.databaseWriteExecutor.execute(() ->{
+            mUserDao.update(user);
+        });
+    }
+
+    public void deleteUser(User user) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
             mUserDao.delete(user);
         });
     }

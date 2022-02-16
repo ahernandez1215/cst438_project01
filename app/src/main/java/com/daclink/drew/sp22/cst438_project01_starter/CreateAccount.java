@@ -1,10 +1,8 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,19 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
-import com.daclink.drew.sp22.cst438_project01_starter.db.AppRepository;
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDAO;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import java.util.Objects;
 
 public class CreateAccount extends AppCompatActivity {
 
     private EditText mUsernameField;
+    private EditText mEmailField;
     private EditText mPasswordField;
 
     private String mUsername;
+    private String mEmail;
     private String mPassword;
 
     private Button mCreateNewAccountBtn;
@@ -41,14 +39,17 @@ public class CreateAccount extends AppCompatActivity {
         connectDisplay();
         initViewModel();
 
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Creating Account");
+
         mCreateNewAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getInputFields();
 
                 if(!checkUserExists()) {
-                    User newUser = new User(mUsername, mPassword, "otter@csumb.edu", false);
+                    User newUser = new User(mUsername, mPassword, mEmail, false);
                     mUserViewModel.insert(newUser);
+                    mUser = mUserViewModel.getUserByUsername(mUsername);
 
                     Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
                     startActivity(intent);
@@ -66,12 +67,14 @@ public class CreateAccount extends AppCompatActivity {
 
     private void connectDisplay() {
         mUsernameField = findViewById(R.id.username);
+        mEmailField = findViewById(R.id.emailEditText);
         mPasswordField = findViewById(R.id.password);
         mCreateNewAccountBtn = findViewById(R.id.createNewAccountBtn);
     }
 
     private void getInputFields() {
         mUsername = mUsernameField.getText().toString();
+        mEmail = mEmailField.getText().toString();
         mPassword = mPasswordField.getText().toString();
     }
 
@@ -81,7 +84,6 @@ public class CreateAccount extends AppCompatActivity {
         if(mUser != null) {
             return true;
         }
-
         return false;
     }
 

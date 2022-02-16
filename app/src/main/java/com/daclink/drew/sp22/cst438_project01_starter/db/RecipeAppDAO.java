@@ -1,8 +1,6 @@
 package com.daclink.drew.sp22.cst438_project01_starter.db;
 
 
-import android.speech.RecognitionListener;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -10,8 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.daclink.drew.sp22.cst438_project01_starter.Recipe;
-import com.daclink.drew.sp22.cst438_project01_starter.User;
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.Recipe;
 
 import java.util.List;
 

@@ -5,34 +5,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentLoginBinding;
-import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
-import com.daclink.drew.sp22.cst438_project01_starter.db.AppRepository;
-import com.daclink.drew.sp22.cst438_project01_starter.db.UserDAO;
-import com.google.android.material.snackbar.Snackbar;
 
+import com.daclink.drew.sp22.cst438_project01_starter.db.UserDAO;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.view.View;
 
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.room.Room;
-
-import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityMainBinding;
-
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         if(isUserLoggedIn()) {
             Intent intent = LandingPage.intentFactory(this, mUserId);
             startActivity(intent);
+            finish();
         }
     }
 

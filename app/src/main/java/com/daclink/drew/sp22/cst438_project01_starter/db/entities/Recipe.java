@@ -1,4 +1,4 @@
-package com.daclink.drew.sp22.cst438_project01_starter;
+package com.daclink.drew.sp22.cst438_project01_starter.db.entities;
 
 
 import androidx.room.Entity;
@@ -7,6 +7,10 @@ import androidx.room.PrimaryKey;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 
 import java.util.List;
+
+/**
+ *  Recipe entity class for use with Room Database
+ */
 
 @Entity(tableName = AppDatabase.RECIPE_TABLE)
 public class Recipe {

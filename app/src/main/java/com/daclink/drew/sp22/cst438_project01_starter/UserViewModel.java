@@ -7,8 +7,13 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppRepository;
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 
 import java.util.List;
+
+/**
+ *  ViewModel for use in UI fragments or activities relating to user
+ */
 
 public class UserViewModel extends AndroidViewModel {
 
@@ -24,6 +29,10 @@ public class UserViewModel extends AndroidViewModel {
     void insert(User user) {
         mRepository.addUser(user);
     }
+
+    void update(User user) { mRepository.updateUser(user); }
+
+    void delete(User user) { mRepository.deleteUser(user); }
 
     User getUserByUsername(String username) {
         return mRepository.getUserByUsername(username);

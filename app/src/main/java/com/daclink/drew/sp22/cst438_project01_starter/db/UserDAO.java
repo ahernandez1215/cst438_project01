@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.daclink.drew.sp22.cst438_project01_starter.User;
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 
 import java.util.List;
 
