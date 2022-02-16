@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentLoginBinding;
+import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
+import com.daclink.drew.sp22.cst438_project01_starter.db.AppRepository;
+import com.daclink.drew.sp22.cst438_project01_starter.db.UserDAO;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +18,12 @@ import android.preference.PreferenceManager;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityMainBinding;
 
@@ -26,10 +31,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
 
     private static final String USER_ID_KEY = "com.daclink.drew.sp22.cst438_project01_starter.userIdKey";
     private SharedPreferences mPreferences = null;
@@ -38,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mSignInBtn;
     private Button mCreateAccountBtn;
+
+    private UserViewModel mUserViewModel;
+    private UserDAO mUserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

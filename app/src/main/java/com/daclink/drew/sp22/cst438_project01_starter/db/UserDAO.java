@@ -1,5 +1,6 @@
 package com.daclink.drew.sp22.cst438_project01_starter.db;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -14,16 +15,16 @@ import java.util.List;
 @Dao
 public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User... users);
+    void insert(User... user);
 
     @Update
-    void update(User... users);
+    void update(User... user);
 
     @Delete
     void delete(User user);
 
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
-    List<User> getAllUsers();
+    LiveData<List<User>> getAllUsers();
 
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserName = :username")
     User getUserByUsername(String username);

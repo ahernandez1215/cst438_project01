@@ -11,7 +11,11 @@ import com.daclink.drew.sp22.cst438_project01_starter.Recipe;
 import com.daclink.drew.sp22.cst438_project01_starter.User;
 import com.daclink.drew.sp22.cst438_project01_starter.db.typeConverters.DataTypeConverters;
 
-@Database(entities = {Recipe.class, User.class}, version = 1, exportSchema = false)
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Database(entities = {Recipe.class, User.class}, version = 2, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -21,15 +25,21 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase instance;
     private static final Object LOCK = new Object();
-    public abstract RecipeAppDAO recipeAppDAO();
-    public abstract UserDAO userDAO();
 
-    public static AppDatabase getInstance(Context context) {
+    private static final int NUMBER_OF_THREADS = 4;
+    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
+    public abstract RecipeAppDAO getRecipeAppDAO();
+    public abstract UserDAO getUserDAO();
+
+    public static AppDatabase getInstance(final Context context) {
         if(instance == null) {
             synchronized (LOCK) {
                 if(instance == null) {
                     instance = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, DB_NAME).build();
+                            AppDatabase.class, DB_NAME)
+                            .fallbackToDestructiveMigration()
+                            .build();
                 }
             }
         }

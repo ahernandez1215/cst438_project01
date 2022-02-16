@@ -2,6 +2,7 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppRepository;
+import com.daclink.drew.sp22.cst438_project01_starter.db.UserDAO;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -29,19 +31,16 @@ public class LoginActivity extends AppCompatActivity {
     private String mPassword;
 
     private Button mLoginButton;
-    private AppDatabase mDb;
-
     private User mUser;
-
-    private AppRepository mRepository;
+    private UserViewModel mUserViewModel;
+    private UserDAO mUserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         connectDisplay();
-
-        mRepository = AppRepository.getInstance(this.getApplicationContext());
+        initViewModel();
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +59,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void initViewModel() {
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+    }
+
     private void connectDisplay() {
         mUsernameField = findViewById(R.id.username);
         mPasswordField = findViewById(R.id.password);
@@ -74,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean validPwd() { return mUser.getPassword().equals(mPassword); }
 
     private boolean checkUser() {
-        mUser = mRepository.getUserByUsername(mUsername);
+        mUser = mUserViewModel.getUserByUsername(mUsername);
 
         if(mUser == null) {
             Toast.makeText(this, "User " + mUsername + " not found ", Toast.LENGTH_SHORT).show();

@@ -2,6 +2,7 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Application;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppRepository;
+import com.daclink.drew.sp22.cst438_project01_starter.db.UserDAO;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -29,14 +31,15 @@ public class CreateAccount extends AppCompatActivity {
     private Button mCreateNewAccountBtn;
     private User mUser;
 
-    private AppRepository mRepository;
+    private UserViewModel mUserViewModel;
+    private UserDAO mUserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         connectDisplay();
-        mRepository = AppRepository.getInstance(this);
+        initViewModel();
 
         mCreateNewAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,8 +48,7 @@ public class CreateAccount extends AppCompatActivity {
 
                 if(!checkUserExists()) {
                     User newUser = new User(mUsername, mPassword, "otter@csumb.edu", false);
-                    mRepository.addUser(newUser);
-                    mUser = mRepository.getUserByUsername(mUsername);
+                    mUserViewModel.insert(newUser);
 
                     Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
                     startActivity(intent);
@@ -56,6 +58,10 @@ public class CreateAccount extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void initViewModel() {
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
     }
 
     private void connectDisplay() {
@@ -70,7 +76,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private boolean checkUserExists() {
-        mUser = mRepository.getUserByUsername(mUsername);
+        mUser = mUserViewModel.getUserByUsername(mUsername);
 
         if(mUser != null) {
             return true;

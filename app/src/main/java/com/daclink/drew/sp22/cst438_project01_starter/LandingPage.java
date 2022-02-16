@@ -1,6 +1,7 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppRepository;
+import com.daclink.drew.sp22.cst438_project01_starter.db.UserDAO;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -21,27 +23,30 @@ public class LandingPage extends AppCompatActivity {
     private int mUserId = -1;
 
     private User mUser;
-    private AppDatabase mDb;
 
     private TextView welcomeTextView;
-    private AppRepository mRepository;
+
+    private UserViewModel mUserViewModel;
+    private UserDAO mUserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
-
-        mRepository = AppRepository.getInstance(this.getApplicationContext());
-
+        initViewModel();
 
         welcomeTextView = findViewById(R.id.textViewWelcome);
         mUserId = getIntent().getIntExtra(USER_ID_KEY, -1);
         System.out.println("THIS IS USER ID: " + mUserId);
 
-        mUser = mRepository.getUserById(mUserId);
+        mUser = mUserViewModel.getUserByUserId(mUserId);
 
         welcomeTextView.setText(String.format("Welcome %s", mUser.getUsername()));
         saveUserPreferences(mUser.getUserId());
+    }
+
+    private void initViewModel() {
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
     }
 
     private void saveUserPreferences(int userId) {

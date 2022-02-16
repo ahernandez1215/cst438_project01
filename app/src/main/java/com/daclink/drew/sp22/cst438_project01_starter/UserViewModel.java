@@ -13,10 +13,12 @@ import java.util.List;
 public class UserViewModel extends AndroidViewModel {
 
     private AppRepository mRepository;
+    private LiveData<List<User>> mUsers;
 
     public UserViewModel(@NonNull Application application) {
         super(application);
         mRepository = AppRepository.getInstance(application.getApplicationContext());
+        mUsers = mRepository.mUsers;
     }
 
     void insert(User user) {

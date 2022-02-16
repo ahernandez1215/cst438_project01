@@ -2,12 +2,17 @@ package com.daclink.drew.sp22.cst438_project01_starter.db;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+
 import com.daclink.drew.sp22.cst438_project01_starter.R;
 import com.daclink.drew.sp22.cst438_project01_starter.User;
 
 import java.lang.reflect.Executable;
+import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  *  Determines from where to fetch data.
@@ -17,11 +22,11 @@ import java.util.concurrent.Executors;
 public class AppRepository {
     public static AppRepository instance;
     private AppDatabase mDb;
+    private UserDAO mUserDao;
+    private RecipeAppDAO mRecipeDao;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    public AppRepository(Context context) {
-        mDb = AppDatabase.getInstance(context);
-    }
+    public LiveData<List<User>> mUsers;
 
     public static AppRepository getInstance(Context context) {
         if (instance == null) {
@@ -30,42 +35,62 @@ public class AppRepository {
         return instance;
     }
 
+    //This constructor is called when AppRepository instance is made.
+    public AppRepository(Context context) {
+        mDb = AppDatabase.getInstance(context);
+        mUserDao = mDb.getUserDAO();
+        mRecipeDao = mDb.getRecipeAppDAO();
+        mUsers = getAllUsers();
+    }
+
     public void addUser(User user) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.userDAO().insert(user);
-            }
+        AppDatabase.databaseWriteExecutor.execute(() ->{
+            mUserDao.insert(user);
         });
+
     }
 
     public void deleteUser(User user) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.userDAO().delete(user); }
+        AppDatabase.databaseWriteExecutor.execute(() ->{
+            mUserDao.delete(user);
         });
     }
 
+    //Callable/Future used to get return value from runnable
     public User getUserById(int userId) {
-        final User[] mUser = new User[1];
-        executor.execute(new Runnable() {
+        User user = new User("1","8","1",false);
+        Future<User> userFuture = AppDatabase.databaseWriteExecutor.submit(new Callable<User>() {
             @Override
-            public void run() {
-                mUser[0] = mDb.userDAO().getUserByUserId(userId);
+            public User call() throws Exception {
+                return mUserDao.getUserByUserId(userId);
             }
         });
-        return mUser[0];
+
+        try {
+            user = userFuture.get();
+        } catch (Exception e) {
+
+        }
+        return user;
     }
 
     public User getUserByUsername(String username) {
-        final User[] mUser = new User[1];
-        executor.execute(new Runnable() {
+        User user = new User("1","8","1",false);
+        Future<User> userFuture = AppDatabase.databaseWriteExecutor.submit(new Callable<User>() {
             @Override
-            public void run() {
-                mUser[0] = mDb.userDAO().getUserByUsername(username);
+            public User call() throws Exception {
+                return mUserDao.getUserByUsername(username);
             }
         });
-        return mUser[0];
+
+        try {
+            user = userFuture.get();
+        } catch (Exception e) {
+        }
+        return user;
+    }
+
+    public LiveData<List<User>> getAllUsers() {
+        return mUserDao.getAllUsers();
     }
 }
