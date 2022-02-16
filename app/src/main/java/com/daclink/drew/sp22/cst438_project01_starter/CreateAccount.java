@@ -2,8 +2,6 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
 import android.app.Application;
 import android.content.Context;
@@ -20,7 +18,7 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.AppRepository;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class LoginActivity extends AppCompatActivity {
+public class CreateAccount extends AppCompatActivity {
 
     private EditText mUsernameField;
     private EditText mPasswordField;
@@ -28,9 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private String mUsername;
     private String mPassword;
 
-    private Button mLoginButton;
-    private AppDatabase mDb;
-
+    private Button mCreateNewAccountBtn;
     private User mUser;
 
     private AppRepository mRepository;
@@ -38,23 +34,25 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_create_account);
         connectDisplay();
+        mRepository = AppRepository.getInstance(this);
 
-        mRepository = AppRepository.getInstance(this.getApplicationContext());
-
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
+        mCreateNewAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getInputFields();
 
-                if(checkUser()) {
-                    if(!validPwd()) {
-                        Toast.makeText(LoginActivity.this, "Invalid password!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
-                        startActivity(intent);
-                    }
+                if(!checkUserExists()) {
+                    User newUser = new User(mUsername, mPassword, "otter@csumb.edu", false);
+                    mRepository.addUser(newUser);
+                    mUser = mRepository.getUserByUsername(mUsername);
+
+                    Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
+                    startActivity(intent);
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "User already exists!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -63,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     private void connectDisplay() {
         mUsernameField = findViewById(R.id.username);
         mPasswordField = findViewById(R.id.password);
-        mLoginButton = findViewById(R.id.loginBtn);
+        mCreateNewAccountBtn = findViewById(R.id.createNewAccountBtn);
     }
 
     private void getInputFields() {
@@ -71,20 +69,18 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = mPasswordField.getText().toString();
     }
 
-    private boolean validPwd() { return mUser.getPassword().equals(mPassword); }
-
-    private boolean checkUser() {
+    private boolean checkUserExists() {
         mUser = mRepository.getUserByUsername(mUsername);
 
-        if(mUser == null) {
-            Toast.makeText(this, "User " + mUsername + " not found ", Toast.LENGTH_SHORT).show();
-            return false;
+        if(mUser != null) {
+            return true;
         }
-        return true;
+
+        return false;
     }
 
     public static Intent intentFactory(Context context) {
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, CreateAccount.class);
         return intent;
     }
 }

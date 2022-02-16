@@ -30,7 +30,7 @@ public interface RecipeAppDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
     List<User> getAllUsers();
 
-    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUsername = :username")
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserName = :username")
     User getUserByUsername(String username);
 
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserId = :userId")
