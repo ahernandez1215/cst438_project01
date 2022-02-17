@@ -17,9 +17,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
-
     private static final String USER_ID_KEY = "com.daclink.drew.sp22.cst438_project01_starter.userIdKey";
     private SharedPreferences mPreferences = null;
 
@@ -27,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mSignInBtn;
     private Button mCreateAccountBtn;
-
-    private UserViewModel mUserViewModel;
-    private UserDAO mUserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Method to check if a user is logged in using shared preferences
     private boolean isUserLoggedIn() {
         //Checks if intent has extra and assigns if it does. If no extra then user is not logged in
         mUserId = getIntent().getIntExtra(USER_ID_KEY, -1);

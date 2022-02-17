@@ -64,7 +64,7 @@ public class EditAccountActivity extends AppCompatActivity {
                 mUpdatedUser = new User(mUsername, mNewPassword, mEmail, false);
                 mUser = mUserViewModel.getUserByUsername(mUsername);
 
-                //If null we aren't updating existing user
+                //If null then we aren't updating an existing user
                 if(mUser == null) {
                     updateAccount = true;
                 } else if (mUser.getUserId() != mCurrentUser.getUserId()) {
@@ -120,7 +120,6 @@ public class EditAccountActivity extends AppCompatActivity {
         deleteAccountBtn = findViewById(R.id.deleteAccountButton);
     }
 
-    //Check for empty password
     private boolean isCurrentPasswordEmpty() {
         if(mCurrentPassword.isEmpty()) {
             return true;

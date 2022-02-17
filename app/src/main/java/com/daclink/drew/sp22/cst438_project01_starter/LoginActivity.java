@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button mLoginButton;
     private User mUser;
     private UserViewModel mUserViewModel;
-    private UserDAO mUserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
