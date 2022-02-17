@@ -22,30 +22,21 @@ public class MainActivity extends AppCompatActivity {
 
     private int mUserId = -1;
 
-    private Button mSignInBtn;
-    private Button mCreateAccountBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSignInBtn = findViewById(R.id.signInBtn);
-        mSignInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = LoginActivity.intentFactory(getApplicationContext());
-                startActivity(intent);
-            }
+        Button mSignInBtn = findViewById(R.id.signInBtn);
+        mSignInBtn.setOnClickListener(view -> {
+            Intent intent = LoginActivity.intentFactory(getApplicationContext());
+            startActivity(intent);
         });
 
-        mCreateAccountBtn = findViewById(R.id.createAccountMainBtn);
-        mCreateAccountBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = CreateAccount.intentFactory(getApplicationContext());
-                startActivity(intent);
-            }
+        Button mCreateAccountBtn = findViewById(R.id.createAccountMainBtn);
+        mCreateAccountBtn.setOnClickListener(view -> {
+            Intent intent = CreateAccount.intentFactory(getApplicationContext());
+            startActivity(intent);
         });
 
         if(isUserLoggedIn()) {

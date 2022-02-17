@@ -24,7 +24,6 @@ public class LandingPage extends AppCompatActivity {
     private SharedPreferences mPreferences = null;
     private int mUserId = -1;
     private User mUser;
-    private TextView welcomeTextView;
     private UserViewModel mUserViewModel;
     private UserDAO mUserDAO;
 
@@ -39,27 +38,19 @@ public class LandingPage extends AppCompatActivity {
         connectDisplay();
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Homepage");
-        welcomeTextView = findViewById(R.id.textViewWelcome);
+        TextView welcomeTextView = findViewById(R.id.textViewWelcome);
         mUserId = getIntent().getIntExtra(USER_ID_KEY, -1);
         System.out.println("THIS IS USER ID: " + mUserId);
         mUser = mUserViewModel.getUserByUserId(mUserId);
         welcomeTextView.setText(String.format("Welcome %s", mUser.getUsername()));
         saveUserPreferences(mUser.getUserId());
 
-        mEditAccountBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = EditAccountActivity.intentFactory(getApplicationContext(), mUser.getUserId());
-                startActivity(intent);
-            }
+        mEditAccountBtn.setOnClickListener(view -> {
+            Intent intent = EditAccountActivity.intentFactory(getApplicationContext(), mUser.getUserId());
+            startActivity(intent);
         });
 
-        mLogoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logout();
-            }
-        });
+        mLogoutBtn.setOnClickListener(view -> logout());
 
     }
 
@@ -81,28 +72,21 @@ public class LandingPage extends AppCompatActivity {
         editor.apply();
     }
 
-    // Logout the user
     private void logout() {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
 
         alertBuilder.setMessage(R.string.logout);
         alertBuilder.setPositiveButton(getString(R.string.no),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {}
-                });
+                (dialog, which) -> {});
         alertBuilder.setNegativeButton(getString(R.string.yeslogout),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        getIntent().putExtra(USER_ID_KEY, -1);
-                        SharedPreferences.Editor editor = mPreferences.edit();
-                        editor.putInt(USER_ID_KEY, -1);
-                        editor.apply();
-                        Intent intent = MainActivity.intentFactory(getApplicationContext(), -1);
-                        startActivity(intent);
-                        finish();
-                    }
+                (dialog, which) -> {
+                    getIntent().putExtra(USER_ID_KEY, -1);
+                    SharedPreferences.Editor editor = mPreferences.edit();
+                    editor.putInt(USER_ID_KEY, -1);
+                    editor.apply();
+                    Intent intent = MainActivity.intentFactory(getApplicationContext(), -1);
+                    startActivity(intent);
+                    finish();
                 });
         alertBuilder.create().show();
     }

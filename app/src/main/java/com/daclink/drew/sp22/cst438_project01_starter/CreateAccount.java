@@ -30,7 +30,6 @@ public class CreateAccount extends AppCompatActivity {
     private User mUser;
 
     private UserViewModel mUserViewModel;
-    private UserDAO mUserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,23 +40,24 @@ public class CreateAccount extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Creating Account");
 
-        mCreateNewAccountBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getInputFields();
+        mCreateNewAccountBtn.setOnClickListener(view -> {
+            getInputFields();
 
-                if(!checkUserExists()) {
-                    User newUser = new User(mUsername, mPassword, mEmail, false);
-                    mUserViewModel.insert(newUser);
-                    mUser = mUserViewModel.getUserByUsername(mUsername);
-
-                    Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
-                    startActivity(intent);
-                    finish();
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "User already exists!", Toast.LENGTH_SHORT).show();
+            if(!checkUserExists()) {
+                if(mUsername.isEmpty() || mPassword.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Cannot have empty fields!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                User newUser = new User(mUsername, mPassword, mEmail, false);
+                mUserViewModel.insert(newUser);
+                mUser = mUserViewModel.getUserByUsername(mUsername);
+
+                Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
+                startActivity(intent);
+                finish();
+
+            } else {
+                Toast.makeText(getApplicationContext(), "User already exists!", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -57,54 +57,48 @@ public class EditAccountActivity extends AppCompatActivity {
         editUsernameField.setText(mCurrentUser.getUsername());
         editEmailField.setText(mCurrentUser.getEmail());
 
-        updateAccountBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getInputFields();
-                mUpdatedUser = new User(mUsername, mNewPassword, mEmail, false);
+        updateAccountBtn.setOnClickListener(view -> {
+            getInputFields();
+            mUpdatedUser = new User(mUsername, mNewPassword, mEmail, false);
+            mUser = mUserViewModel.getUserByUsername(mUsername);
+
+            //If null then we aren't updating an existing user
+            if(mUser == null) {
+                updateAccount = true;
+            } else if (mUser.getUserId() != mCurrentUser.getUserId()) {
+                Toast.makeText(EditAccountActivity.this, "Cannot edit someone else!", Toast.LENGTH_SHORT).show();
+            } else {
+                updateAccount = true;
+            }
+
+            if(isCurrentPasswordEmpty()) {
+                Toast.makeText(EditAccountActivity.this, "Need current password", Toast.LENGTH_SHORT).show();
+                updateAccount = false;
+            }
+
+            if(updateAccount) {
+                if(!mCurrentPassword.equals(mCurrentUser.getPassword())) {
+                    Toast.makeText(EditAccountActivity.this, "Current Password Incorrect", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                mUpdatedUser.setUserId(mCurrentUser.getUserId());
+                mUserViewModel.update(mUpdatedUser);
+                Toast.makeText(EditAccountActivity.this, "Account Updated!", Toast.LENGTH_SHORT).show();
                 mUser = mUserViewModel.getUserByUsername(mUsername);
 
-                //If null then we aren't updating an existing user
-                if(mUser == null) {
-                    updateAccount = true;
-                } else if (mUser.getUserId() != mCurrentUser.getUserId()) {
-                    Toast.makeText(EditAccountActivity.this, "Cannot edit someone else!", Toast.LENGTH_SHORT).show();
-                } else {
-                    updateAccount = true;
-                }
-
-                if(isCurrentPasswordEmpty() || isNewPasswordEmpty()) {
-                    Toast.makeText(EditAccountActivity.this, "Cannot have empty password", Toast.LENGTH_SHORT).show();
-                    updateAccount = false;
-                }
-
-                if(updateAccount) {
-                    if(!mCurrentPassword.equals(mCurrentUser.getPassword())) {
-                        Toast.makeText(EditAccountActivity.this, "Current Password Incorrect", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    mUpdatedUser.setUserId(mCurrentUser.getUserId());
-                    mUserViewModel.update(mUpdatedUser);
-                    Toast.makeText(EditAccountActivity.this, "Account Updated!", Toast.LENGTH_SHORT).show();
-                    mUser = mUserViewModel.getUserByUsername(mUsername);
-
-                    saveUserPreferences(mCurrentUser.getUserId());
-                    Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
-                    startActivity(intent);
-                }
+                saveUserPreferences(mCurrentUser.getUserId());
+                Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
+                startActivity(intent);
             }
         });
 
-        deleteAccountBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getInputFields();
+        deleteAccountBtn.setOnClickListener(view -> {
+            getInputFields();
 
-                if(!mCurrentPassword.equals(mCurrentUser.getPassword())) {
-                    Toast.makeText(EditAccountActivity.this, "Enter correct password to delete", Toast.LENGTH_SHORT).show();
-                } else {
-                    deleteAccount();
-                }
+            if(!mCurrentPassword.equals(mCurrentUser.getPassword())) {
+                Toast.makeText(EditAccountActivity.this, "Enter correct password to delete", Toast.LENGTH_SHORT).show();
+            } else {
+                deleteAccount();
             }
         });
         saveUserPreferences(mUserId);
@@ -154,18 +148,12 @@ public class EditAccountActivity extends AppCompatActivity {
 
         alertBuilder.setMessage("Delete Account");
         alertBuilder.setPositiveButton(getString(R.string.nodont),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {}
-                });
+                (dialog, which) -> {});
         alertBuilder.setNegativeButton(getString(R.string.yesdelete),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mUser = mUserViewModel.getUserByUserId(mUserId);
-                        mUserViewModel.delete(mUser);
-                        logout();
-                    }
+                (dialog, which) -> {
+                    mUser = mUserViewModel.getUserByUserId(mUserId);
+                    mUserViewModel.delete(mUser);
+                    logout();
                 });
         alertBuilder.create().show();
     }

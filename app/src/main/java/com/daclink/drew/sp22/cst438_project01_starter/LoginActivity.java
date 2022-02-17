@@ -37,19 +37,16 @@ public class LoginActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Login");
 
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getInputFields();
+        mLoginButton.setOnClickListener(view -> {
+            getInputFields();
 
-                if(checkUser()) {
-                    if(!validPwd()) {
-                        Toast.makeText(LoginActivity.this, "Invalid password!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
-                        startActivity(intent);
-                        finish();
-                    }
+            if(checkUser()) {
+                if(!validPwd()) {
+                    Toast.makeText(LoginActivity.this, "Invalid password!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

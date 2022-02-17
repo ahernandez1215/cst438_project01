@@ -32,6 +32,11 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract RecipeAppDAO getRecipeAppDAO();
     public abstract UserDAO getUserDAO();
 
+    /**
+     * Creates single instance of database. Runs on background thread(s).
+     * @param context
+     * @return AppDatabase
+     */
     public static AppDatabase getInstance(final Context context) {
         if(instance == null) {
             synchronized (LOCK) {

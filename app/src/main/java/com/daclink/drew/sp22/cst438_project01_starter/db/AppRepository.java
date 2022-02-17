@@ -8,13 +8,11 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
- *  Determines from where to fetch data.
- *  Pull from local room database or web API
+ *  Determines from where to retrieve or update data
+ *  (pulls from local room database or food web API)
  */
 
 public class AppRepository {
