@@ -25,7 +25,6 @@ public class LandingPage extends AppCompatActivity {
     private int mUserId = -1;
     private User mUser;
     private UserViewModel mUserViewModel;
-    private UserDAO mUserDAO;
 
     private Button mLogoutBtn;
     private Button mEditAccountBtn;

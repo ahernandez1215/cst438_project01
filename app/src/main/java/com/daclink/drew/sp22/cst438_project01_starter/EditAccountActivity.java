@@ -17,6 +17,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 
+import java.util.Objects;
+
 public class EditAccountActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.daclink.drew.sp22.cst438_project01_starter.userIdKey";
     private SharedPreferences mPreferences = null;
@@ -51,6 +53,8 @@ public class EditAccountActivity extends AppCompatActivity {
         connectDisplay();
         initViewModel();
         getCurrentUserId();
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Editing Account");
+
 
         mCurrentUser = mUserViewModel.getUserByUserId(mUserId);
 
@@ -115,17 +119,11 @@ public class EditAccountActivity extends AppCompatActivity {
     }
 
     private boolean isCurrentPasswordEmpty() {
-        if(mCurrentPassword.isEmpty()) {
-            return true;
-        }
-        return false;
+        return mCurrentPassword.isEmpty();
     }
 
     private boolean isNewPasswordEmpty() {
-        if(mNewPassword.isEmpty()) {
-            return true;
-        }
-        return false;
+        return mNewPassword.isEmpty();
     }
 
     private void getInputFields() {

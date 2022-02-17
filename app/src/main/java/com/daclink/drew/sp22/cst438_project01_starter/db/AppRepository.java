@@ -4,10 +4,11 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.Recipe;
 import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 
 import java.util.List;
-import java.util.concurrent.Callable;
+import java.util.Objects;
 import java.util.concurrent.Future;
 
 /**
@@ -38,10 +39,8 @@ public class AppRepository {
         mUsers = getAllUsers();
     }
 
-    public void addUser(User user) {
-        AppDatabase.databaseWriteExecutor.execute(() ->{
-            mUserDao.insert(user);
-        });
+    public void insertUser(User user) {
+        AppDatabase.databaseWriteExecutor.execute(() -> mUserDao.insert(user));
 
     }
 
@@ -53,46 +52,84 @@ public class AppRepository {
     }
 
     public void deleteUser(User user) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            mUserDao.delete(user);
-        });
+        AppDatabase.databaseWriteExecutor.execute(() -> mUserDao.delete(user));
     }
 
     //Callable/Future used to get return value from runnable
     public User getUserById(int userId) {
-        User user = new User("1","8","1",false);
-        Future<User> userFuture = AppDatabase.databaseWriteExecutor.submit(new Callable<User>() {
-            @Override
-            public User call() throws Exception {
-                return mUserDao.getUserByUserId(userId);
-            }
-        });
+        User user = null;
+        Future<User> userFuture = AppDatabase.databaseWriteExecutor.submit(() -> mUserDao.getUserByUserId(userId));
 
         try {
             user = userFuture.get();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return user;
     }
 
     public User getUserByUsername(String username) {
-        User user = new User("1","8","1",false);
-        Future<User> userFuture = AppDatabase.databaseWriteExecutor.submit(new Callable<User>() {
-            @Override
-            public User call() throws Exception {
-                return mUserDao.getUserByUsername(username);
-            }
-        });
+        User user = null;
+        Future<User> userFuture = AppDatabase.databaseWriteExecutor.submit(() -> mUserDao.getUserByUsername(username));
 
         try {
             user = userFuture.get();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return user;
     }
 
     public LiveData<List<User>> getAllUsers() {
         return mUserDao.getAllUsers();
+    }
+
+    //Recipe methods
+    public void insertRecipe(Recipe recipe) {
+        AppDatabase.databaseWriteExecutor.execute(() -> mRecipeDao.insert(recipe));
+    }
+
+    public void updateRecipe(Recipe recipe) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mRecipeDao.update(recipe);
+            mRecipeDao = mDb.getRecipeAppDAO();
+        });
+    }
+
+    public void deleteRecipe(Recipe recipe) {
+        AppDatabase.databaseWriteExecutor.execute(() -> mRecipeDao.delete(recipe));
+    }
+
+    public Recipe getRecipeById(int recipeId) {
+        Recipe recipe = null;
+        Future<Recipe> recipeFuture = AppDatabase.databaseWriteExecutor.submit(() -> mRecipeDao.getRecipeByRecipeId(recipeId));
+        try {
+            recipe = recipeFuture.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recipe;
+    }
+
+    public Recipe getRecipeByName(String recipeName) {
+        Recipe recipe = null;
+        Future<Recipe> recipeFuture = AppDatabase.databaseWriteExecutor.submit(() -> mRecipeDao.getRecipeByName(recipeName));
+        try {
+            recipe = recipeFuture.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recipe;
+    }
+
+    public Recipe getRecipeByApiId(int recipeApiId) {
+        Recipe recipe = null;
+        Future<Recipe> recipeFuture = AppDatabase.databaseWriteExecutor.submit(() -> mRecipeDao.getRecipeByApiId(recipeApiId));
+        try {
+            recipe = recipeFuture.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recipe;
     }
 }
