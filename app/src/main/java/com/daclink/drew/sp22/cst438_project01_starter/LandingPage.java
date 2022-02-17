@@ -29,6 +29,7 @@ public class LandingPage extends AppCompatActivity {
     private UserDAO mUserDAO;
 
     private Button mLogoutBtn;
+    private Button mEditAccountBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,13 @@ public class LandingPage extends AppCompatActivity {
         welcomeTextView.setText(String.format("Welcome %s", mUser.getUsername()));
         saveUserPreferences(mUser.getUserId());
 
+        mEditAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = EditAccountActivity.intentFactory(getApplicationContext(), mUser.getUserId());
+                startActivity(intent);
+            }
+        });
 
         mLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +64,7 @@ public class LandingPage extends AppCompatActivity {
     }
 
     private void connectDisplay() {
+        mEditAccountBtn = findViewById(R.id.editAccountBtn);
         mLogoutBtn = findViewById(R.id.logout);
     }
 
@@ -92,6 +101,7 @@ public class LandingPage extends AppCompatActivity {
                         editor.apply();
                         Intent intent = MainActivity.intentFactory(getApplicationContext(), -1);
                         startActivity(intent);
+                        finish();
                     }
                 });
         alertBuilder.create().show();

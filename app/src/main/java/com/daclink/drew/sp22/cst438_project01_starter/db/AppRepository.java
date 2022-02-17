@@ -22,7 +22,6 @@ public class AppRepository {
     private AppDatabase mDb;
     private UserDAO mUserDao;
     private RecipeAppDAO mRecipeDao;
-    private Executor executor = Executors.newSingleThreadExecutor();
 
     public LiveData<List<User>> mUsers;
 
@@ -51,6 +50,7 @@ public class AppRepository {
     public void updateUser(User user) {
         AppDatabase.databaseWriteExecutor.execute(() ->{
             mUserDao.update(user);
+            mUserDao = mDb.getUserDAO();
         });
     }
 

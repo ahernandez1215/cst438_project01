@@ -17,7 +17,7 @@ public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(User... user);
 
     @Delete

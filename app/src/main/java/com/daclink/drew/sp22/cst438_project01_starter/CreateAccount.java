@@ -53,6 +53,7 @@ public class CreateAccount extends AppCompatActivity {
 
                     Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
                     startActivity(intent);
+                    finish();
 
                 } else {
                     Toast.makeText(getApplicationContext(), "User already exists!", Toast.LENGTH_SHORT).show();
