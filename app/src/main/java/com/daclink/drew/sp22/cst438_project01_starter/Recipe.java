@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = AppDatabase.RECIPE_TABLE)
@@ -14,7 +15,7 @@ public class Recipe {
     @PrimaryKey(autoGenerate = true)
     private int mRecipeId;
 
-    private int mApiId;
+    private String mApiId;
     private String mName;
     private String mCategory;
     private String mArea;
@@ -25,7 +26,7 @@ public class Recipe {
     private List<String> mIngredients;
     private List<String> mMeasurements;
 
-    public Recipe(int mRecipeId, int mApiId, String mName, String mCategory, String mArea, String mInstructions, String mThumbnail, String mTags, String mYoutube, List<String> mIngredients, List<String> mMeasurements) {
+    public Recipe(int mRecipeId, String mApiId, String mName, String mCategory, String mArea, String mInstructions, String mThumbnail, String mTags, String mYoutube, List<String> mIngredients, List<String> mMeasurements) {
         this.mRecipeId = mRecipeId;
         this.mApiId = mApiId;
         this.mName = mName;
@@ -39,6 +40,62 @@ public class Recipe {
         this.mMeasurements = mMeasurements;
     }
 
+    public Recipe(RecipeModel recipeModel) {
+        List<String> ingredientsList = new ArrayList<String>();
+        List<String> measureList = new ArrayList<String>();
+
+        this.mApiId = recipeModel.getIdMeal();
+        this.mName = recipeModel.getStrMeal();
+        this.mCategory = recipeModel.getStrCategory();
+        this.mArea = recipeModel.getStrArea();
+        this.mInstructions = recipeModel.getStrInstructions();
+        this.mThumbnail = recipeModel.getStrMealThumb();
+        this.mYoutube = recipeModel.getStrYoutube();
+        ingredientsList.add(recipeModel.getStrIngredient1());
+        ingredientsList.add(recipeModel.getStrIngredient2());
+        ingredientsList.add(recipeModel.getStrIngredient3());
+        ingredientsList.add(recipeModel.getStrIngredient4());
+        ingredientsList.add(recipeModel.getStrIngredient5());
+        ingredientsList.add(recipeModel.getStrIngredient6());
+        ingredientsList.add(recipeModel.getStrIngredient7());
+        ingredientsList.add(recipeModel.getStrIngredient8());
+        ingredientsList.add(recipeModel.getStrIngredient9());
+        ingredientsList.add(recipeModel.getStrIngredient10());
+        ingredientsList.add(recipeModel.getStrIngredient11());
+        ingredientsList.add(recipeModel.getStrIngredient12());
+        ingredientsList.add(recipeModel.getStrIngredient13());
+        ingredientsList.add(recipeModel.getStrIngredient14());
+        ingredientsList.add(recipeModel.getStrIngredient15());
+        ingredientsList.add(recipeModel.getStrIngredient16());
+        ingredientsList.add(recipeModel.getStrIngredient17());
+        ingredientsList.add(recipeModel.getStrIngredient18());
+        ingredientsList.add(recipeModel.getStrIngredient19());
+        ingredientsList.add(recipeModel.getStrIngredient20());
+        this.mIngredients = ingredientsList;
+        measureList.add(recipeModel.getStrMeasure1());
+        measureList.add(recipeModel.getStrMeasure2());
+        measureList.add(recipeModel.getStrMeasure3());
+        measureList.add(recipeModel.getStrMeasure4());
+        measureList.add(recipeModel.getStrMeasure5());
+        measureList.add(recipeModel.getStrMeasure6());
+        measureList.add(recipeModel.getStrMeasure7());
+        measureList.add(recipeModel.getStrMeasure8());
+        measureList.add(recipeModel.getStrMeasure9());
+        measureList.add(recipeModel.getStrMeasure10());
+        measureList.add(recipeModel.getStrMeasure11());
+        measureList.add(recipeModel.getStrMeasure12());
+        measureList.add(recipeModel.getStrMeasure13());
+        measureList.add(recipeModel.getStrMeasure14());
+        measureList.add(recipeModel.getStrMeasure15());
+        measureList.add(recipeModel.getStrMeasure16());
+        measureList.add(recipeModel.getStrMeasure17());
+        measureList.add(recipeModel.getStrMeasure18());
+        measureList.add(recipeModel.getStrMeasure19());
+        measureList.add(recipeModel.getStrMeasure20());
+        this.mMeasurements = measureList;
+
+    }
+
     public int getRecipeId() {
         return mRecipeId;
     }
@@ -47,11 +104,11 @@ public class Recipe {
         this.mRecipeId = mRecipeId;
     }
 
-    public int getApiId() {
+    public String getApiId() {
         return mApiId;
     }
 
-    public void setApiId(int mApiId) {
+    public void setApiId(String mApiId) {
         this.mApiId = mApiId;
     }
 
