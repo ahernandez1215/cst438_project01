@@ -26,14 +26,16 @@ public class EditAccountActivity extends AppCompatActivity {
 
     private EditText editUsernameField;
     private EditText editEmailField;
-    private EditText editPasswordField;
+    private EditText editCurrentPasswordField;
+    private EditText editNewPasswordField;
 
     private Button updateAccountBtn;
     private Button deleteAccountBtn;
 
     private String mUsername;
     private String mEmail;
-    private String mPassword;
+    private String mCurrentPassword;
+    private String mNewPassword;
 
     private User mUser;
     private User mUpdatedUser;
@@ -59,7 +61,7 @@ public class EditAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getInputFields();
-                mUpdatedUser = new User(mUsername, mPassword, mEmail, false);
+                mUpdatedUser = new User(mUsername, mNewPassword, mEmail, false);
                 mUser = mUserViewModel.getUserByUsername(mUsername);
 
                 //If null we aren't updating existing user
@@ -71,12 +73,16 @@ public class EditAccountActivity extends AppCompatActivity {
                     updateAccount = true;
                 }
 
-                if(isEmptyPassword()) {
+                if(isCurrentPasswordEmpty() || isNewPasswordEmpty()) {
                     Toast.makeText(EditAccountActivity.this, "Cannot have empty password", Toast.LENGTH_SHORT).show();
                     updateAccount = false;
                 }
 
                 if(updateAccount) {
+                    if(!mCurrentPassword.equals(mCurrentUser.getPassword())) {
+                        Toast.makeText(EditAccountActivity.this, "Current Password Incorrect", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     mUpdatedUser.setUserId(mCurrentUser.getUserId());
                     mUserViewModel.update(mUpdatedUser);
                     Toast.makeText(EditAccountActivity.this, "Account Updated!", Toast.LENGTH_SHORT).show();
@@ -92,7 +98,13 @@ public class EditAccountActivity extends AppCompatActivity {
         deleteAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteAccount();
+                getInputFields();
+
+                if(!mCurrentPassword.equals(mCurrentUser.getPassword())) {
+                    Toast.makeText(EditAccountActivity.this, "Enter correct password to delete", Toast.LENGTH_SHORT).show();
+                } else {
+                    deleteAccount();
+                }
             }
         });
         saveUserPreferences(mUserId);
@@ -101,15 +113,23 @@ public class EditAccountActivity extends AppCompatActivity {
     private void connectDisplay() {
         editUsernameField = findViewById(R.id.editUsername);
         editEmailField = findViewById(R.id.editEmail);
-        editPasswordField = findViewById(R.id.editPassword);
+        editCurrentPasswordField = findViewById(R.id.currentPassword);
+        editNewPasswordField = findViewById(R.id.newPassword);
 
         updateAccountBtn = findViewById(R.id.updateAccountButton);
         deleteAccountBtn = findViewById(R.id.deleteAccountButton);
     }
 
     //Check for empty password
-    private boolean isEmptyPassword() {
-        if(mPassword.isEmpty()) {
+    private boolean isCurrentPasswordEmpty() {
+        if(mCurrentPassword.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isNewPasswordEmpty() {
+        if(mNewPassword.isEmpty()) {
             return true;
         }
         return false;
@@ -118,7 +138,8 @@ public class EditAccountActivity extends AppCompatActivity {
     private void getInputFields() {
         mUsername = editUsernameField.getText().toString();
         mEmail = editEmailField.getText().toString();
-        mPassword = editPasswordField.getText().toString();
+        mCurrentPassword = editCurrentPasswordField.getText().toString();
+        mNewPassword = editNewPasswordField.getText().toString();
     }
 
     private void initViewModel() {
