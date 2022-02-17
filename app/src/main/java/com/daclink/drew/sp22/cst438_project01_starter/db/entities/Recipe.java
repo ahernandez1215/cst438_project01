@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  *  Recipe entity class for use with Room Database
@@ -129,5 +130,18 @@ public class Recipe {
 
     public void setMeasurements(List<String> mMeasurements) {
         this.mMeasurements = mMeasurements;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return mRecipeId == recipe.mRecipeId && mApiId == recipe.mApiId && mName.equals(recipe.mName) && Objects.equals(mCategory, recipe.mCategory) && Objects.equals(mArea, recipe.mArea) && Objects.equals(mInstructions, recipe.mInstructions) && Objects.equals(mThumbnail, recipe.mThumbnail) && Objects.equals(mTags, recipe.mTags) && Objects.equals(mYoutube, recipe.mYoutube) && Objects.equals(mIngredients, recipe.mIngredients) && Objects.equals(mMeasurements, recipe.mMeasurements);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mRecipeId, mApiId, mName, mCategory, mArea, mInstructions, mThumbnail, mTags, mYoutube, mIngredients, mMeasurements);
     }
 }

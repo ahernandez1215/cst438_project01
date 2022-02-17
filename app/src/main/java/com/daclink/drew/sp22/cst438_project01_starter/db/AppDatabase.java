@@ -27,7 +27,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     //Setting number of threads higher causes bugs?
     private static final int NUMBER_OF_THREADS = 1;
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     public abstract RecipeAppDAO getRecipeAppDAO();
     public abstract UserDAO getUserDAO();

@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 
+import java.util.Objects;
+
 /**
  *  User entity class for use with Room Database
  */
@@ -62,5 +64,18 @@ public class User {
 
     public void setIsAdmin(Boolean mIsAdmin) {
         this.mIsAdmin = mIsAdmin;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return mUsername.equals(user.mUsername) && mPassword.equals(user.mPassword);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mUsername, mPassword);
     }
 }
