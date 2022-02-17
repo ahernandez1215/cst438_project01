@@ -1,6 +1,7 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +19,8 @@ public class  SearchPage extends AppCompatActivity {
     private EditText mMainIngredient;
     private RecipeModel recipeModel;
     private Recipe recipe;
-    private EndpointInterface apiService = RetrofitClientInstance(EndpointInterface.class);
+    private RetrofitClientInstance retrofitClientInstance;
+    private LiveData<RecipeModel> recipeModelLiveData;
 
     private int mUserId;
     private User mUser;
@@ -42,7 +44,7 @@ public class  SearchPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (mRecipeName != null) {
-                    recipe = getRecipeFromApi();
+                    recipe = getRecipeByNameApi(mRecipeName.getText().toString());
                     Intent intent = DisplayRecipe.intentFactory(getApplicationContext(), mUser.getUserId(), recipe);
                     startActivity(intent);
                 }
@@ -50,8 +52,11 @@ public class  SearchPage extends AppCompatActivity {
         });
     }
 
-    private Recipe getRecipeFromApi() {
-
-        Call<RecipeModel> call = RetrofitClientInstance.
+    private Recipe getRecipeByNameApi(String recipeName) {
+        retrofitClientInstance.searchByName(recipeName);
+        recipeModelLiveData = retrofitClientInstance.getRecipeModelLiveData();
+        recipeModel = recipeModelLiveData.getValue();
+        recipe = new Recipe(recipeModel);
+        return recipe;
     }
 }
