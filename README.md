@@ -14,3 +14,4 @@ Learning resources used: <br>
 [Room Tutorial](https://codinginflow.com/tutorials/android/room-viewmodel-livedata-recyclerview-mvvm/part-1-introduction) <br>
 [Another Room tutorial](http://thetechnocafe.com/how-to-use-room-in-android-all-you-need-to-know-to-get-started/)<br>
 [Room Database using Executors](https://developer.android.com/codelabs/android-room-with-a-view?hl=en#7)
+[Room Typeconverter for List](https://medium.com/@toddcookevt/android-room-storing-lists-of-objects-766cca57e3f9)
