@@ -3,11 +3,13 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import retrofit2.Call;
 
@@ -18,7 +20,7 @@ public class  SearchPage extends AppCompatActivity {
     private EditText mRecipeName;
     private EditText mMainIngredient;
     private RecipeModel recipeModel;
-    private Recipe recipe;
+    private String recipeNameString;
     private RetrofitClientInstance retrofitClientInstance;
     private LiveData<RecipeModel> recipeModelLiveData;
 
@@ -44,19 +46,18 @@ public class  SearchPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (mRecipeName != null) {
-                    recipe = getRecipeByNameApi(mRecipeName.getText().toString());
-                    Intent intent = DisplayRecipe.intentFactory(getApplicationContext(), mUser.getUserId(), recipe);
+                    recipeNameString = mRecipeName.getText().toString();
+                    Intent intent = DisplayRecipe.intentFactory(getApplicationContext(), recipeNameString);
                     startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please enter a recipe to search for!", Toast.LENGTH_LONG);
                 }
             }
         });
     }
 
-    private Recipe getRecipeByNameApi(String recipeName) {
-        retrofitClientInstance.searchByName(recipeName);
-        recipeModelLiveData = retrofitClientInstance.getRecipeModelLiveData();
-        recipeModel = recipeModelLiveData.getValue();
-        recipe = new Recipe(recipeModel);
-        return recipe;
+    public static Intent intentFactory(Context context) {
+        Intent intent = new Intent(context, SearchPage.class);
+        return intent;
     }
 }

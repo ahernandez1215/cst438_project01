@@ -47,7 +47,8 @@ public class LoginActivity extends AppCompatActivity {
                     if(!validPwd()) {
                         Toast.makeText(LoginActivity.this, "Invalid password!", Toast.LENGTH_SHORT).show();
                     } else {
-                        //TODO: Take to landing page
+                        Intent intent = SearchPage.intentFactory(getApplicationContext());
+                        startActivity(intent);
                     }
                 }
             }

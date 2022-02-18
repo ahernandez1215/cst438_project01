@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private int mUserId = -1;
 
     private Button mSignInBtn;
+    private Button mRecipeSearchBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
