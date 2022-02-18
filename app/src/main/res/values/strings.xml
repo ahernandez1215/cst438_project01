@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CST438_Project01_Starter</string>
+    <string name="app_name">Food Recipe Application</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -14,4 +14,35 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="sign_in">Sign In</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="create_account">Create Account</string>
+    <string name="create">Create</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register">Register</string>
+    <string name="welcometv">Welcome</string>
+    <string name="logout">Logout</string>
+    <string name="button">Button</string>
+    <string name="yes" />
+    <string name="yeslogout">yes</string>
+    <string name="nologout">no</string>
+    <string name="no">no</string>
+    <string name="editing_account">Editing Account</string>
+    <string name="string_editing_account">Editing Account</string>
+    <string name="email">Email</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="edit_account">Edit Account</string>
+    <string name="update">Update</string>
+    <string name="yesdelete">yes</string>
+    <string name="nodont">no</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
 </resources>

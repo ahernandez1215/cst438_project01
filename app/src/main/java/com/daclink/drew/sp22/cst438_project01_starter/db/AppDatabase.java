@@ -7,11 +7,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.daclink.drew.sp22.cst438_project01_starter.Recipe;
-import com.daclink.drew.sp22.cst438_project01_starter.User;
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.Recipe;
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 import com.daclink.drew.sp22.cst438_project01_starter.db.typeConverters.DataTypeConverters;
 
-@Database(entities = {Recipe.class, User.class}, version = 1)
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Database(entities = {Recipe.class, User.class}, version = 2, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -19,16 +22,31 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String RECIPE_TABLE = "RECIPE_TABLE";
     public static final String USER_TABLE = "USER_TABLE";
 
-    //public abstract RecipeAppDAO getRecipeAppDAO();
-
     private static volatile AppDatabase instance;
     private static final Object LOCK = new Object();
-    public abstract RecipeAppDAO recipeAppDAO();
 
-    public static AppDatabase getInstance(Context context) {
+    //Setting number of threads higher causes bugs?
+    private static final int NUMBER_OF_THREADS = 1;
+    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
+    public abstract RecipeAppDAO getRecipeAppDAO();
+    public abstract UserDAO getUserDAO();
+
+    /**
+     * Creates single instance of database. Runs on background thread(s).
+     * @param context
+     * @return AppDatabase
+     */
+    public static AppDatabase getInstance(final Context context) {
         if(instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDatabase.class, DB_NAME).build();
+            synchronized (LOCK) {
+                if(instance == null) {
+                    instance = Room.databaseBuilder(context.getApplicationContext(),
+                            AppDatabase.class, DB_NAME)
+                            .fallbackToDestructiveMigration()
+                            .build();
+                }
+            }
         }
         return instance;
     }

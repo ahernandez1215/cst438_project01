@@ -16,38 +16,48 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.UserDAO;
 
 import java.util.Objects;
 
-public class LoginActivity extends AppCompatActivity {
+public class CreateAccount extends AppCompatActivity {
 
     private EditText mUsernameField;
+    private EditText mEmailField;
     private EditText mPasswordField;
 
     private String mUsername;
+    private String mEmail;
     private String mPassword;
 
-    private Button mLoginButton;
+    private Button mCreateNewAccountBtn;
     private User mUser;
+
     private UserViewModel mUserViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_create_account);
         connectDisplay();
         initViewModel();
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Login");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Creating Account");
 
-        mLoginButton.setOnClickListener(view -> {
+        mCreateNewAccountBtn.setOnClickListener(view -> {
             getInputFields();
 
-            if(checkUser()) {
-                if(!validPwd()) {
-                    Toast.makeText(LoginActivity.this, "Invalid password!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
-                    startActivity(intent);
-                    finish();
+            if(!checkUserExists()) {
+                if(mUsername.isEmpty() || mPassword.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Cannot have empty fields!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                User newUser = new User(mUsername, mPassword, mEmail, false);
+                mUserViewModel.insert(newUser);
+                mUser = mUserViewModel.getUserByUsername(mUsername);
+
+                Intent intent = LandingPage.intentFactory(getApplicationContext(), mUser.getUserId());
+                startActivity(intent);
+                finish();
+
+            } else {
+                Toast.makeText(getApplicationContext(), "User already exists!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -58,29 +68,28 @@ public class LoginActivity extends AppCompatActivity {
 
     private void connectDisplay() {
         mUsernameField = findViewById(R.id.username);
+        mEmailField = findViewById(R.id.emailEditText);
         mPasswordField = findViewById(R.id.password);
-        mLoginButton = findViewById(R.id.loginBtn);
+        mCreateNewAccountBtn = findViewById(R.id.createNewAccountBtn);
     }
 
     private void getInputFields() {
         mUsername = mUsernameField.getText().toString();
+        mEmail = mEmailField.getText().toString();
         mPassword = mPasswordField.getText().toString();
     }
 
-    private boolean validPwd() { return mUser.getPassword().equals(mPassword); }
-
-    private boolean checkUser() {
+    private boolean checkUserExists() {
         mUser = mUserViewModel.getUserByUsername(mUsername);
 
-        if(mUser == null) {
-            Toast.makeText(this, "User " + mUsername + " not found ", Toast.LENGTH_SHORT).show();
-            return false;
+        if(mUser != null) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static Intent intentFactory(Context context) {
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, CreateAccount.class);
         return intent;
     }
 }
