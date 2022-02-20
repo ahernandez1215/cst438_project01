@@ -1,8 +1,5 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,20 +8,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+
 import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
 
-import retrofit2.Call;
-
-public class  SearchPage extends AppCompatActivity {
+public class SearchPage extends AppCompatActivity {
 
     private Button mSearchByName;
     private Button mSearchByIngredient;
+    private Button mSearchByCategory;
     private EditText mRecipeName;
     private EditText mMainIngredient;
+    private EditText mRecipeCategory;
     private RecipeModel recipeModel;
     private String recipeNameString;
-    private RetrofitClientInstance retrofitClientInstance;
-    private LiveData<RecipeModel> recipeModelLiveData;
+    private String recipeCategoryString;
 
     private int mUserId;
     private User mUser;
@@ -43,6 +44,8 @@ public class  SearchPage extends AppCompatActivity {
         mSearchByIngredient = findViewById((R.id.buttonSearchByIngredient));
         mRecipeName = findViewById(R.id.editTextSearchByName);
         mMainIngredient = findViewById(R.id.editTextSearchByIngredient);
+        mSearchByCategory = findViewById(R.id.searchByCategoryBtn);
+        mRecipeCategory = findViewById(R.id.editTextSearchByCategory);
 
         mSearchByName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +57,20 @@ public class  SearchPage extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Please enter a recipe to search for!", Toast.LENGTH_LONG);
+                }
+            }
+        });
+
+        mSearchByCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mRecipeCategory != null) {
+                    recipeCategoryString = mRecipeCategory.getText().toString();
+
+                    Intent intent = RecipeCategoryActivity.intentFactory(getApplicationContext(), recipeCategoryString);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please enter a category to search for!", Toast.LENGTH_LONG);
                 }
             }
         });

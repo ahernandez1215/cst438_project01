@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DisplayRecipe extends AppCompatActivity implements LifecycleObserver {
 
@@ -83,9 +84,14 @@ public class DisplayRecipe extends AppCompatActivity implements LifecycleObserve
         retrofitClientInstance.getRecipeResponseLiveData().observe(this, new Observer<RecipeResponse>() {
             @Override
             public void onChanged(RecipeResponse recipeModelData) {
-                if(recipeModelData != null) {
-                    System.out.println("LIVEDATA OBSERVER CHANGE!!!!!");
+                try{
                     fillInformation(recipeModelData.getRecipeModel());
+
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Recipe not found!", Toast.LENGTH_SHORT).show();
+                    Intent intent = SearchPage.intentFactory(getApplicationContext());
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

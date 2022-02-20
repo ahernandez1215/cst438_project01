@@ -18,6 +18,9 @@
             android:name=".SearchPage"
             android:exported="false" />
         <activity
+            android:name=".RecipeCategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".LandingPage"
             android:exported="false" />
         <activity

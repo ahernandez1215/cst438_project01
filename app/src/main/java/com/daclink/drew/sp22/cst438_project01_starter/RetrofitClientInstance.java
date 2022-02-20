@@ -20,9 +20,11 @@ public class RetrofitClientInstance {
 
     private EndpointInterface endpointInterface;
     private MutableLiveData<RecipeResponse> recipeResponseLiveData;
+    private MutableLiveData<RecipeCategoryResponse> recipeCategoryResponseLiveData;
 
     public RetrofitClientInstance(String BASE_URL) {
         recipeResponseLiveData = new MutableLiveData<>();
+        recipeCategoryResponseLiveData = new MutableLiveData<>();
 
         OkHttpClient client = new OkHttpClient();
 
@@ -50,12 +52,38 @@ public class RetrofitClientInstance {
                     public void onFailure(Call<RecipeResponse> call, Throwable t) {
                         System.out.println("Failed!");
                         recipeResponseLiveData.postValue(null);
-                        System.out.println("ERRRROOOOORRRRRR" + t.getMessage());
+                        System.out.println("Error" + t.getMessage());
                     }
                 });
     }
 
+    public void searchByCategory(String mealCategory) {
+        endpointInterface.getRecipeByCategory(mealCategory)
+                .enqueue(new Callback<RecipeCategoryResponse>() {
+                    @Override
+                    public void onResponse(Call<RecipeCategoryResponse> call, Response<RecipeCategoryResponse> response) {
+                        System.out.println("Success!");
+                        if(response.body() != null) {
+                            recipeCategoryResponseLiveData.postValue(response.body());
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<RecipeCategoryResponse> call, Throwable t) {
+                        System.out.println("Failed!");
+                        recipeResponseLiveData.postValue(null);
+                        System.out.println("Error" + t.getMessage());
+                    }
+                });
+
+    }
+
     public LiveData<RecipeResponse> getRecipeResponseLiveData() {
         return recipeResponseLiveData;
+    }
+
+    public LiveData<RecipeCategoryResponse> getRecipeCategoryResponseLiveData() {
+        return recipeCategoryResponseLiveData;
     }
 }

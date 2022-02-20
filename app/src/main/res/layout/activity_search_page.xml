@@ -34,14 +34,27 @@
         android:id="@+id/editTextSearchByIngredient"
         android:layout_width="262dp"
         android:layout_height="45dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="76dp"
         android:ems="10"
+        android:hint="Search Recipe by Ingredient"
         android:inputType="textPersonName"
-        android:hint="Search for Recipe by Ingredient"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSearchByName" />
+
+    <EditText
+        android:id="@+id/editTextSearchByCategory"
+        android:layout_width="262dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="76dp"
+        android:ems="10"
+        android:hint="Search Recipe by Category"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSearchByIngredient" />
 
     <Button
         android:id="@+id/buttonSearchByName"
@@ -64,5 +77,15 @@
         app:layout_constraintHorizontal_bias="0.627"
         app:layout_constraintStart_toEndOf="@+id/editTextSearchByIngredient"
         app:layout_constraintTop_toBottomOf="@+id/buttonSearchByName" />
+
+    <Button
+        android:id="@+id/searchByCategoryBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="16dp"
+        android:text="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSearchByIngredient" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
