@@ -1,20 +1,24 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class DisplayRecipe extends AppCompatActivity {
+public class DisplayRecipe extends AppCompatActivity implements LifecycleObserver {
 
     public static final String BASE_URL = "https://www.themealdb.com/";
     
     private RetrofitClientInstance retrofitClientInstance = new RetrofitClientInstance(BASE_URL);
-    private LiveData<RecipeModel> recipeModelLiveData;
+    private LiveData<RecipeResponse> recipeModelLiveData;
     private RecipeModel recipeModel;
+    private RecipeViewModel recipeViewModel;
 
     private TextView mRecipeName;
     private TextView mInstructions;
@@ -61,24 +65,41 @@ public class DisplayRecipe extends AppCompatActivity {
 
     private String recipeName;
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_recipe);
-        
+
         wireUpDisplay();
 
         recipeName = getIntent().getStringExtra("Recipe Name");
         System.out.println(recipeName);
-        recipeModel = getRecipeByNameApi(recipeName);
 
-        fillInformation(recipeModel);
+        initViewModel();
+
+        getLifecycle().addObserver(this);
+        retrofitClientInstance.searchByName(recipeName);
+        retrofitClientInstance.getRecipeResponseLiveData().observe(this, new Observer<RecipeResponse>() {
+            @Override
+            public void onChanged(RecipeResponse recipeModelData) {
+                if(recipeModelData != null) {
+                    System.out.println("LIVEDATA OBSERVER CHANGE!!!!!");
+                    fillInformation(recipeModelData.getRecipeModel());
+                }
+            }
+        });
+    }
+
+    private void initViewModel() {
+        recipeViewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
     }
 
     private void fillInformation(RecipeModel recipeModel) {
         mRecipeName.setText(recipeModel.getStrMeal());
         mInstructions.setText(recipeModel.getStrInstructions());
+        mIngredient1.setText(recipeModel.getStrIngredient1());
+        mIngredient2.setText(recipeModel.getStrIngredient2());
 
 
     }
@@ -126,11 +147,6 @@ public class DisplayRecipe extends AppCompatActivity {
         mMeasure20 = findViewById(R.id.measure20);
         mInstructions = findViewById(R.id.instructions);
         mRecipeName = findViewById(R.id.RecipeName);
-    }
-
-    public RecipeModel getRecipeByNameApi(String recipeName) {
-        recipeModel = retrofitClientInstance.searchByName(recipeName);
-        return recipeModel;
     }
 
     public static Intent intentFactory(Context context, String recipeName) {

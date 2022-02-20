@@ -19,10 +19,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClientInstance {
 
     private EndpointInterface endpointInterface;
-    private List<RecipeModel> recipeModelList;
+    private MutableLiveData<RecipeResponse> recipeResponseLiveData;
 
     public RetrofitClientInstance(String BASE_URL) {
-        recipeModelList = new ArrayList<>();
+        recipeResponseLiveData = new MutableLiveData<>();
 
         OkHttpClient client = new OkHttpClient();
 
@@ -34,25 +34,28 @@ public class RetrofitClientInstance {
                 .create(EndpointInterface.class);
     }
 
-    public RecipeModel searchByName(String mealName) {
+    public void searchByName(String mealName) {
         endpointInterface.getRecipeByName(mealName)
-              .enqueue(new Callback<List<RecipeModel>>() {
-                  @Override
-                  public void onResponse(Call<List<RecipeModel>> call, Response<List<RecipeModel>> response) {
-                      System.out.println("Success!");
-                      recipeModelList = response.body();
-                  }
+                .enqueue(new Callback<RecipeResponse>() {
+                    @Override
+                    public void onResponse(Call<RecipeResponse> call, Response<RecipeResponse> response) {
+                        System.out.println("Success!");
+                        if(response.body() != null) {
+                            recipeResponseLiveData.postValue(response.body());
+                        }
 
-                  @Override
-                  public void onFailure(Call<List<RecipeModel>> call, Throwable t) {
-                      System.out.println("Failed!");
-                      recipeModelList = null;
-                  }
-              });
-            return recipeModelList.get(0);
-        }
+                    }
 
-    public RecipeModel getRecipeModelLiveData() {
-        return recipeModelList.get(0);
+                    @Override
+                    public void onFailure(Call<RecipeResponse> call, Throwable t) {
+                        System.out.println("Failed!");
+                        recipeResponseLiveData.postValue(null);
+                        System.out.println("ERRRROOOOORRRRRR" + t.getMessage());
+                    }
+                });
+    }
+
+    public LiveData<RecipeResponse> getRecipeResponseLiveData() {
+        return recipeResponseLiveData;
     }
 }

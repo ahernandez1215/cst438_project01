@@ -1,11 +1,12 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
-import java.util.List;
+
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+
 
 public interface EndpointInterface {
 
@@ -16,5 +17,5 @@ public interface EndpointInterface {
     Call<RecipeModel> getRecipeByMainIngredient(@Path("mainIngredient") String mainIngredient);
 
     @GET("/api/json/v1/1/search.php")
-    Call<List<RecipeModel>> getRecipeByName(@Query("s") String mealName);
+    Call<RecipeResponse> getRecipeByName(@Query("s") String mealName);
 }
