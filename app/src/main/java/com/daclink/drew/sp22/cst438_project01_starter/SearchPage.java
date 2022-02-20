@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.daclink.drew.sp22.cst438_project01_starter.db.entities.User;
+
 import retrofit2.Call;
 
 public class  SearchPage extends AppCompatActivity {
@@ -47,6 +49,7 @@ public class  SearchPage extends AppCompatActivity {
             public void onClick(View view) {
                 if (mRecipeName != null) {
                     recipeNameString = mRecipeName.getText().toString();
+                    System.out.println(recipeNameString);
                     Intent intent = DisplayRecipe.intentFactory(getApplicationContext(), recipeNameString);
                     startActivity(intent);
                 } else {

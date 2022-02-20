@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class DisplayRecipe extends AppCompatActivity {
+
+    public static final String BASE_URL = "https://www.themealdb.com/";
     
-    private RetrofitClientInstance retrofitClientInstance;
+    private RetrofitClientInstance retrofitClientInstance = new RetrofitClientInstance(BASE_URL);
     private LiveData<RecipeModel> recipeModelLiveData;
     private RecipeModel recipeModel;
 
@@ -57,7 +59,7 @@ public class DisplayRecipe extends AppCompatActivity {
     private TextView mMeasure19;
     private TextView mMeasure20;
 
-
+    private String recipeName;
 
     
     @Override
@@ -66,8 +68,10 @@ public class DisplayRecipe extends AppCompatActivity {
         setContentView(R.layout.activity_display_recipe);
         
         wireUpDisplay();
-        
-        recipeModel = getRecipeByNameApi(getIntent().getStringExtra("Recipe Name"));
+
+        recipeName = getIntent().getStringExtra("Recipe Name");
+        System.out.println(recipeName);
+        recipeModel = getRecipeByNameApi(recipeName);
 
         fillInformation(recipeModel);
     }
@@ -124,10 +128,8 @@ public class DisplayRecipe extends AppCompatActivity {
         mRecipeName = findViewById(R.id.RecipeName);
     }
 
-    private RecipeModel getRecipeByNameApi(String recipeName) {
-        retrofitClientInstance.searchByName(recipeName);
-        recipeModelLiveData = retrofitClientInstance.getRecipeModelLiveData();
-        recipeModel = recipeModelLiveData.getValue();
+    public RecipeModel getRecipeByNameApi(String recipeName) {
+        recipeModel = retrofitClientInstance.searchByName(recipeName);
         return recipeModel;
     }
 
