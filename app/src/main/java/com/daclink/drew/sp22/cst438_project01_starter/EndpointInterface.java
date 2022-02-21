@@ -13,8 +13,8 @@ public interface EndpointInterface {
     @GET("api/json/v1/1/lookup.php")
     Call<RecipeModel> getRecipeById(@Query("i") String mealId);
 
-    @GET("api/json/v1/1/filter.php?i={mainIngredient}")
-    Call<RecipeModel> getRecipeByMainIngredient(@Path("mainIngredient") String mainIngredient);
+    @GET("api/json/v1/1/filter.php")
+    Call<RecipeIngredientResponse> getRecipeByMainIngredient(@Query("i") String mainIngredient);
 
     @GET("/api/json/v1/1/search.php")
     Call<RecipeResponse> getRecipeByName(@Query("s") String mealName);

@@ -9,8 +9,12 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 public class DisplayRecipe extends AppCompatActivity implements LifecycleObserver {
 
@@ -63,6 +67,7 @@ public class DisplayRecipe extends AppCompatActivity implements LifecycleObserve
     private TextView mMeasure18;
     private TextView mMeasure19;
     private TextView mMeasure20;
+    private ImageView mMealThumbView;
 
     private String recipeName;
 
@@ -104,8 +109,49 @@ public class DisplayRecipe extends AppCompatActivity implements LifecycleObserve
     private void fillInformation(RecipeModel recipeModel) {
         mRecipeName.setText(recipeModel.getStrMeal());
         mInstructions.setText(recipeModel.getStrInstructions());
+        String url = recipeModel.getStrMealThumb();
+        Glide.with(mMealThumbView).load(url).into(mMealThumbView);
+        mInstructions.setMovementMethod(new ScrollingMovementMethod());
         mIngredient1.setText(recipeModel.getStrIngredient1());
         mIngredient2.setText(recipeModel.getStrIngredient2());
+        mIngredient3.setText(recipeModel.getStrIngredient3());
+        mIngredient4.setText(recipeModel.getStrIngredient4());
+        mIngredient5.setText(recipeModel.getStrIngredient5());
+        mIngredient6.setText(recipeModel.getStrIngredient6());
+        mIngredient7.setText(recipeModel.getStrIngredient7());
+        mIngredient8.setText(recipeModel.getStrIngredient8());
+        mIngredient9.setText(recipeModel.getStrIngredient9());
+        mIngredient10.setText(recipeModel.getStrIngredient10());
+        mIngredient11.setText(recipeModel.getStrIngredient11());
+        mIngredient12.setText(recipeModel.getStrIngredient12());
+        mIngredient13.setText(recipeModel.getStrIngredient13());
+        mIngredient14.setText(recipeModel.getStrIngredient14());
+        mIngredient15.setText(recipeModel.getStrIngredient15());
+        mIngredient16.setText(recipeModel.getStrIngredient16());
+        mIngredient17.setText(recipeModel.getStrIngredient17());
+        mIngredient18.setText(recipeModel.getStrIngredient18());
+        mIngredient19.setText(recipeModel.getStrIngredient19());
+        mIngredient20.setText(recipeModel.getStrIngredient20());
+        mMeasure1.setText(recipeModel.getStrMeasure1());
+        mMeasure2.setText(recipeModel.getStrMeasure2());
+        mMeasure3.setText(recipeModel.getStrMeasure3());
+        mMeasure4.setText(recipeModel.getStrMeasure4());
+        mMeasure5.setText(recipeModel.getStrMeasure5());
+        mMeasure6.setText(recipeModel.getStrMeasure6());
+        mMeasure7.setText(recipeModel.getStrMeasure7());
+        mMeasure8.setText(recipeModel.getStrMeasure8());
+        mMeasure9.setText(recipeModel.getStrMeasure9());
+        mMeasure10.setText(recipeModel.getStrMeasure10());
+        mMeasure11.setText(recipeModel.getStrMeasure11());
+        mMeasure12.setText(recipeModel.getStrMeasure12());
+        mMeasure13.setText(recipeModel.getStrMeasure13());
+        mMeasure14.setText(recipeModel.getStrMeasure14());
+        mMeasure15.setText(recipeModel.getStrMeasure15());
+        mMeasure16.setText(recipeModel.getStrMeasure16());
+        mMeasure17.setText(recipeModel.getStrMeasure17());
+        mMeasure18.setText(recipeModel.getStrMeasure18());
+        mMeasure19.setText(recipeModel.getStrMeasure19());
+        mMeasure20.setText(recipeModel.getStrMeasure20());
 
 
     }
@@ -153,6 +199,7 @@ public class DisplayRecipe extends AppCompatActivity implements LifecycleObserve
         mMeasure20 = findViewById(R.id.measure20);
         mInstructions = findViewById(R.id.instructions);
         mRecipeName = findViewById(R.id.RecipeName);
+        mMealThumbView = findViewById(R.id.recipeImage);
     }
 
     public static Intent intentFactory(Context context, String recipeName) {
