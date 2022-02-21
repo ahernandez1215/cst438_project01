@@ -26,6 +26,7 @@ public class SearchPage extends AppCompatActivity {
     private RecipeModel recipeModel;
     private String recipeNameString;
     private String recipeCategoryString;
+    private String mainIngredientString;
 
     private int mUserId;
     private User mUser;
@@ -71,6 +72,19 @@ public class SearchPage extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Please enter a category to search for!", Toast.LENGTH_LONG);
+                }
+            }
+        });
+
+        mSearchByIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mMainIngredient != null) {
+                    mainIngredientString = mMainIngredient.getText().toString();
+                    Intent intent = RecipeIngredientActivity.intentFactory(getApplicationContext(), mainIngredientString);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please enter a main ingredient!", Toast.LENGTH_LONG);
                 }
             }
         });

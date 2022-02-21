@@ -21,10 +21,12 @@ public class RetrofitClientInstance {
     private EndpointInterface endpointInterface;
     private MutableLiveData<RecipeResponse> recipeResponseLiveData;
     private MutableLiveData<RecipeCategoryResponse> recipeCategoryResponseLiveData;
+    private MutableLiveData<RecipeIngredientResponse> recipeIngredientResponseLiveData;
 
     public RetrofitClientInstance(String BASE_URL) {
         recipeResponseLiveData = new MutableLiveData<>();
         recipeCategoryResponseLiveData = new MutableLiveData<>();
+        recipeIngredientResponseLiveData = new MutableLiveData<>();
 
         OkHttpClient client = new OkHttpClient();
 
@@ -57,6 +59,25 @@ public class RetrofitClientInstance {
                 });
     }
 
+    public void searchByMainIngredient(String mainIngredient) {
+        endpointInterface.getRecipeByMainIngredient(mainIngredient)
+                .enqueue(new Callback<RecipeIngredientResponse>() {
+                    @Override
+                    public void onResponse(Call<RecipeIngredientResponse> call, Response<RecipeIngredientResponse> response) {
+                        if(response.body() != null) {
+                            recipeIngredientResponseLiveData.postValue(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RecipeIngredientResponse> call, Throwable t) {
+                        System.out.println(call);
+                        recipeIngredientResponseLiveData.postValue(null);
+                        System.out.println("Error on Main Ingredient call: " + t.getMessage());
+                    }
+                });
+    }
+
     public void searchByCategory(String mealCategory) {
         endpointInterface.getRecipeByCategory(mealCategory)
                 .enqueue(new Callback<RecipeCategoryResponse>() {
@@ -85,5 +106,9 @@ public class RetrofitClientInstance {
 
     public LiveData<RecipeCategoryResponse> getRecipeCategoryResponseLiveData() {
         return recipeCategoryResponseLiveData;
+    }
+
+    public LiveData<RecipeIngredientResponse> getRecipeIngredientResponseLiveData() {
+        return recipeIngredientResponseLiveData;
     }
 }

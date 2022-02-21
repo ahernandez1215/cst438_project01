@@ -12,7 +12,8 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="184dp"
-        android:text="TextView"
+        android:text=""
+        android:scrollbars="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -22,7 +23,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="208dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -32,7 +33,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="232dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -42,7 +43,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="256dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -52,7 +53,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="280dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -62,7 +63,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="304dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -72,7 +73,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="160dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -82,7 +83,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -92,7 +93,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="64dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -102,7 +103,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="88dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -112,7 +113,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="112dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -122,19 +123,19 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="136dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
     <TextView
         android:id="@+id/RecipeName"
-        android:layout_width="154dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="324dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -144,7 +145,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="400dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -164,7 +165,7 @@
         android:layout_width="311dp"
         android:layout_height="82dp"
         android:layout_marginTop="4dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipeImage" />
@@ -175,7 +176,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="424dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -185,7 +186,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="448dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -195,7 +196,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="472dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -205,7 +206,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="328dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -215,7 +216,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="352dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -225,7 +226,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="376dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -235,7 +236,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
@@ -244,7 +245,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="112dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -254,7 +255,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="136dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -264,7 +265,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -274,7 +275,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="40dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -284,7 +285,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="64dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -294,7 +295,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="88dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -304,7 +305,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="160dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -314,7 +315,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="184dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -324,7 +325,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="208dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -334,7 +335,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="232dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -344,7 +345,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="256dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -354,7 +355,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="280dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -364,7 +365,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="304dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -374,7 +375,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="328dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -384,7 +385,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="352dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -394,7 +395,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="376dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -404,7 +405,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="400dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -414,7 +415,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="424dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -424,7 +425,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="448dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -434,7 +435,7 @@
         android:layout_width="102dp"
         android:layout_height="25dp"
         android:layout_marginTop="472dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
