@@ -28,6 +28,7 @@ public class LandingPage extends AppCompatActivity {
 
     private Button mLogoutBtn;
     private Button mEditAccountBtn;
+    private Button mSearchBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,11 @@ public class LandingPage extends AppCompatActivity {
             startActivity(intent);
         });
 
+        mSearchBtn.setOnClickListener(view -> {
+            Intent intent = SearchPage.intentFactory(getApplicationContext());
+            startActivity(intent);
+        });
+
         mLogoutBtn.setOnClickListener(view -> logout());
 
     }
@@ -56,6 +62,7 @@ public class LandingPage extends AppCompatActivity {
     private void connectDisplay() {
         mEditAccountBtn = findViewById(R.id.editAccountBtn);
         mLogoutBtn = findViewById(R.id.logout);
+        mSearchBtn = findViewById(R.id.searchBtn);
     }
 
     private void initViewModel() {
