@@ -15,12 +15,14 @@ android:
    - sys-img-armeabi-v7a-android-22
    - sys-img-
    - extra-android-m2repository
-
-before_install:
-  - echo yes | sdkmanager "build-tools;30.0.2"
-  - echo yes | sdkmanager "platforms;android-31"
+ licenses:
+   - 'android-sdk-preview-license-.+'
+   - 'android-sdk-license-.+'
+   - 'google-gdk-license-.+'
 
 before_script:
+ - mkdir -p "$ANDROID_HOME/licenses"
+ - cp ./google-licenses/* "$ANDROID_HOME/licenses/"
  # Create and start emulator
  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
  - emulator -avd test -no-skin -no-audio -no-window &
