@@ -6,11 +6,13 @@ sudo: false
 
 android:
  components:
-   #- platform-tools
-   #- tools
-   #- build-tools-30.0.2
-   #- android-31
+   - platform-tools
+   - tools
+   - build-tools-30.0.2
+   - android-31
    - android-22
+   #- android-29
+   #- android-24
    - sys-img-armeabi-v7a-android-22
    - sys-img-
    - extra-android-m2repository
@@ -19,11 +21,9 @@ android:
    - 'android-sdk-license-.+'
    - 'google-gdk-license-.+'
 
-install:
-  - echo y | android update sdk -u -a -t tools
-  - echo y | android update sdk -u -a -t platform-tools
-  - echo y | android update sdk -u -a -t build-tools-30.0.2
-  - echo y | android update sdk -u -a -t android-31
+before_install:
+  - echo y | sdkmanager "platforms;android-31"
+  - echo y | sdkmanager "build-tools;30.0.2"
 
 before_script:
  # Create and start emulator
