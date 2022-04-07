@@ -23,8 +23,8 @@ android:
    - '.+'
 
 before_install:
-  - yes | sdkmanager "platforms;android-31"
-  - yes | sdkmanager "build-tools;30.0.2"
+  - sdkmanager "platforms;android-31"
+  - sdkmanager "build-tools;30.0.2"
 
 before_script:
  # Create and start emulator
