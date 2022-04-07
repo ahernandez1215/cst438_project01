@@ -19,6 +19,9 @@ android:
    - 'android-sdk-preview-license-.+'
    - 'android-sdk-license-.+'
    - 'google-gdk-license-.+'
+before_install:
+  - echo yes | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-31"
+  - echo yes | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;30.0.2"
 
 before_script:
  # Create and start emulator
