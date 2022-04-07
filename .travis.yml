@@ -9,15 +9,15 @@ android:
     #- platform-tools
     - android-29
     - android-28
-    - sys-img-armeabi-v7a-android-28
-    - sys-img-
+    #- sys-img-armeabi-v8a-android-28
+    #- sys-img-
     #- sys-img-x86-android-29
     - extra-android-m2repository
 env:
   global:
     - TARGET_VERSION=31
     - ANDROID_API_LEVEL=31
-    - ANDROID_ABI=armeabi-v7a
+    - ANDROID_ABI=armeabi-v8a
     - ANDROID_BUILD_TOOLS_VERSION=30.0.2
     - ANDROID_HOME=~/android-sdk
     - QEMU_AUDIO_DRV=none
@@ -32,7 +32,7 @@ before_install:
 before_script:
  # Create and start emulator
  - chmod +x gradlew
- - echo no | android create avd --force -n test -t android-28 --abi armeabi-v7a
+ - echo no | android create avd --force -n test -t android-28 --abi armeabi-v8a
  - emulator -avd test -no-window &
  - android-wait-for-emulator
  - adb shell input keyevent 82 &
