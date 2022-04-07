@@ -7,6 +7,9 @@ android:
     - tools
     - platform-tools
     - tools
+    - android-22
+    - sys-img-armeabi-v7a-android-22
+    - sys-img-
     - extra-android-m2repository
 env:
   global:
