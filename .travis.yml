@@ -5,9 +5,8 @@ sudo: false
 
 android:
   components:
-    - tools
-    - platform-tools
-    - android-24
+    #- tools
+    #- platform-tools
     - android-29
     - android-24
     - sys-img-armeabi-v7a-android-24
@@ -28,8 +27,6 @@ before_install:
   - unzip commandlinetools.zip -d $ANDROID_HOME/
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-${TARGET_VERSION}" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" --sdk_root=$ANDROID_HOME
-
-install: travis_wait mvn install
 
 before_script:
  # Create and start emulator
