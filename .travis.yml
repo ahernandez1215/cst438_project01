@@ -1,16 +1,18 @@
 os: linux
 language: android
 jdk: openjdk11
+sudo: false
 
 android:
   components:
     - tools
     - platform-tools
-    - tools
+    - android-24
+    - android-29
     - android-24
     - sys-img-armeabi-v7a-android-24
     - sys-img-
-    - sys-img-x86-android-29
+    #- sys-img-x86-android-29
     - extra-android-m2repository
 env:
   global:
