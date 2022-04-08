@@ -26,19 +26,22 @@ android:
     - 'mips-.+'
     - 'google-.+'
 
+install: travis_wait 30 mvn install
+
 before_install:
   # Update SDK manager to work with jdk 11
   - touch $HOME/.android/repositories.cfg
   - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
   - unzip commandlinetools.zip -d $ANDROID_HOME/
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
-
-before_script:
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
 
   # Emulator Start
-  - emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
+  - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
+
+before_script:
+
 
   # Wait for emulator to start
   - bash android-wait-for-emulator
