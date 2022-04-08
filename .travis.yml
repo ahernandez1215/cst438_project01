@@ -34,7 +34,7 @@ before_install:
 
   #- yes | $ANDROID_HOME/cmdline_tools/bin/sdkmanager --update
   #- sdkmanager tools
-  - $ANDROID_HOME/cmdline_tools/bin/sdkmanager "system-images;android-29;google_apis;x86"
+  - $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86"
 
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
