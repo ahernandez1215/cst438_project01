@@ -10,7 +10,7 @@ android:
   components:
     # explicitly state required components
     - tools
-    #- tools
+    - tools
     - platform-tools
     - build-tools-30.0.2
 
@@ -33,17 +33,18 @@ before_install:
   - unzip commandlinetools.zip -d $ANDROID_HOME/
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
 
-before_script:
   # Emulator Creation
   - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
+
+before_script:
 
   # Emulator Start (x86 no hardware acceleration)
   - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
   - android-wait-for-emulator
 
   # List available emulator targets
-  - android list target
-  - $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
+  #- android list target
+  #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
 
   - adb shell input keyevent 82 &
 
