@@ -10,6 +10,7 @@ jdk: openjdk11
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
+    - ANDROID_HOME=~/android-sdk
 
 android:
   components:
@@ -17,14 +18,14 @@ android:
     - tools
     - tools
     - platform-tools
-    - build-tools-30.0.2
+    #- build-tools-30.0.2
 
     # The SDK version used by the project
-    - android-29
+    #- android-29
 
     # Addons
-    - addon
-    - extra
+    #- addon
+    - extra-android-m2repository
 
   licenses:
     - 'android-.+'
@@ -33,33 +34,18 @@ android:
 
 before_install:
   # Update SDK manager to work with jdk 11
-#  - touch $HOME/.android/repositories.cfg
-#  - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
-#  - unzip commandlinetools.zip -d $ANDROID_HOME/
-#  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --update --sdk_root=$ANDROID_HOME
-##  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
-##  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
-#  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
-  - cd android-sdk/tools
-  - mkdir jaxb_lib
-  - wget https://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.jar -O jaxb_lib/activation.jar
-  - wget https://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-impl/2.3.3/jaxb-impl-2.3.3.jar -O jaxb_lib/jaxb-impl.jar
-  - wget https://repo1.maven.org/maven2/com/sun/istack/istack-commons-runtime/3.0.11/istack-commons-runtime-3.0.11.jar -O jaxb_lib/istack-commons-runtime.jar
-  - wget https://repo1.maven.org/maven2/org/glassfish/jaxb/jaxb-xjc/2.3.3/jaxb-xjc-2.3.3.jar -O jaxb_lib/jaxb-xjc.jar
-  - wget https://repo1.maven.org/maven2/org/glassfish/jaxb/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1.jar -O jaxb_lib/jaxb-core.jar
-  - wget https://repo1.maven.org/maven2/org/glassfish/jaxb/jaxb-jxc/2.3.3/jaxb-jxc-2.3.3.jar -O jaxb_lib/jaxb-jxc.jar
-  - wget https://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar -O jaxb_lib/jaxb-api.jar
-  - sed -ie 's%^CLASSPATH=.*%\0:$APP_HOME/jaxb_lib/*%' bin/sdkmanager bin/avdmanager
-
-
-  - yes | $ANDROID_HOME/tools/bin/sdkmanager --update
-  - sdkmanager tools
-  - sdkmanager "system-images;android-29;google_apis;x86"
+  - touch $HOME/.android/repositories.cfg
+  - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
+  - unzip commandlinetools.zip -d $ANDROID_HOME/
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --update --sdk_root=$ANDROID_HOME
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
 
 before_script:
   # Emulator Creation (x86 no hardware acceleration)
-  #- echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86" --abi x86
-  - echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
+  - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86" --abi x86
+  #- echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
 
   # Emulator Start
   - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
