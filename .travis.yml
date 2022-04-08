@@ -11,8 +11,8 @@ android:
     #- platform-tools
     - android-29
     - android-24
-    - sys-img-armeabi-v7a-android-24
-    #- sys-img-
+    #- sys-img-armeabi-v7a-android-24
+    - sys-img-
     - sys-img-x86-android-29
     - extra-android-m2repository
 env:
