@@ -22,11 +22,11 @@ env:
   global:
     - TARGET_VERSION=29
     - ANDROID_API_LEVEL=29
-    - ANDROID_ABI=armeabi-v7a
+    #- ANDROID_ABI=armeabi-v7a
     - ANDROID_BUILD_TOOLS_VERSION=30.0.2
     - ANDROID_HOME=~/android-sdk
     - QEMU_AUDIO_DRV=none
-    #- ANDROID_SDK_ROOT=~/android-sdk
+    - ANDROID_SDK_ROOT=/home/travis/android-sdk/
 
 before_install:
   - touch $HOME/.android/repositories.cfg
