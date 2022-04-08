@@ -40,14 +40,8 @@ before_script:
   # Emulator Start
   - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
-
-  # List available emulator targets
-  - android list target
-  - $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
-
-  - emulator -list-avds
   # Wait for emulator to start
-  - android-wait-for-emulator
+  - bash android-wait-for-emulator
   - adb shell input keyevent 82 &
 
 script: ./gradlew build connectedCheck
