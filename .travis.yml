@@ -37,7 +37,7 @@ before_install:
   - $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
 
   # Emulator Creation (x86 no hardware acceleration)
-  - echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
+  - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
 
   # Emulator Start
   - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
