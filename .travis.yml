@@ -49,7 +49,7 @@ before_script:
   - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86" --abi x86
 
   # Emulator Start
-  - $ANDROID_HOME/emulator/emulator -avd test -memory 100 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
+  - $ANDROID_HOME/emulator/emulator -avd test -memory 800 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
   - android list target
   - $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
