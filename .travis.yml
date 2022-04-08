@@ -27,9 +27,14 @@ android:
     - 'google-.+'
 
 before_install:
-  - yes | $ANDROID_HOME/tools/bin/sdkmanager --update
-  - sdkmanager tools
-  - sdkmanager "system-images;android-29;google_apis;x86"
+  # Update SDK manager to work with jdk 11
+  - touch $HOME/.android/repositories.cfg
+  - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
+  - unzip commandlinetools.zip -d $ANDROID_HOME/
+
+  #- yes | $ANDROID_HOME/cmdline_tools/bin/sdkmanager --update
+  #- sdkmanager tools
+  - $ANDROID_HOME/cmdline_tools/bin/sdkmanager "system-images;android-29;google_apis;x86"
 
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
@@ -40,7 +45,7 @@ before_install:
 before_script:
   # List available emulator targets
   - android list target
-  - sdkmanager --list
+  - $ANDROID_HOME/cmdline_tools/bin/sdkmanager --list
 
   # Wait for emulator to start
   - android-wait-for-emulator
