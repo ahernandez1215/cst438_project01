@@ -81,12 +81,13 @@ before_install:
   - sdkmanager tools
   - sdkmanager "system-images;android-29;google_apis;x86"
   - echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
-  - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+  - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
   # Emulator management: Create, Start, Wait
   # List available emulator targets
-  - android list targets
+  - android list target
+  - android updated sdk
   # SdkManager related
   - sdkmanager --list
 
