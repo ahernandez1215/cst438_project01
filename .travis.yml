@@ -26,7 +26,7 @@ env:
     - ANDROID_BUILD_TOOLS_VERSION=30.0.2
     - ANDROID_HOME=~/android-sdk
     - QEMU_AUDIO_DRV=none
-    - ANDROID_SDK_ROOT=/home/travis/android-sdk/
+    - ANDROID_SDK_ROOT=$ANDROID_HOME
 
 before_install:
   - touch $HOME/.android/repositories.cfg
