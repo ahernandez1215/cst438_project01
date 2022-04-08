@@ -1,3 +1,8 @@
+# Helpful resources:
+# https://travis-ci.community/t/add-kvm-support/1406/8
+# https://docs.travis-ci.com/user/languages/android/
+# https://config.travis-ci.com/
+
 language: android
 dist: trusty
 android:
@@ -14,12 +19,6 @@ android:
     # Addons
     - addon
     - extra
-    # - extra-google-google_play_services
-    # - extra-google-m2repository
-    # - extra-android-m2repository
-
-    # System images needed to run emulator
-    #- sys-img-x86-android-29
 
   licenses:
     - 'android-.+'
@@ -30,23 +29,24 @@ before_install:
   - yes | $ANDROID_HOME/tools/bin/sdkmanager --update
   - sdkmanager tools
   - sdkmanager "system-images;android-29;google_apis;x86"
+
+  # Emulator Creation (x86 no hardware acceleration)
   - echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
+
+  # Emulator Start
   - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
-  # Emulator management: Create, Start, Wait
   # List available emulator targets
   - android list target
-  # SdkManager related
   - sdkmanager --list
 
-  #- echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a -c 100M # use for non x86
-  #- echo no | android create avd --force -n test -t android-29 --abi x86 -c 100M
-  #- emulator -avd test -no-audio -no-window &
+  # Wait for emulator to start
   - android-wait-for-emulator
+
   - adb shell input keyevent 82 &
 
-script: ./gradew build connectedCheck
+script: ./gradlew build connectedCheck
 
 # When using gradle (dependency caching), do following to avoid uploading cache after every build
 before_cache:
