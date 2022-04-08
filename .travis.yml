@@ -77,6 +77,7 @@ android:
     - 'google-.+'
 
 before_install:
+  - yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
   - sdkmanager tools
   - sdkmanager "system-images;android29;google_apis;x86"
   - echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
