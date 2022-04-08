@@ -11,11 +11,11 @@ android:
     # explicitly state required components
     - tools
     #- tools
-    #- platform-tools
-    #- build-tools-30.0.2
+    - platform-tools
+    - build-tools-30.0.2
 
     # The SDK version used by the project
-    #- android-29
+    - android-29
 
     # Addons
     - addon
@@ -31,14 +31,12 @@ before_install:
   - touch $HOME/.android/repositories.cfg
   - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
   - unzip commandlinetools.zip -d $ANDROID_HOME/
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
 
-  # Emulator Creation (x86 no hardware acceleration)
+  # Emulator Creation
   - no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
 
-  # Emulator Start
+  # Emulator Start (x86 no hardware acceleration)
   - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
