@@ -71,6 +71,24 @@ android:
     # System images needed to run emulators
     - sys-img-x86-android-29
 
+env:
+  global:
+    - SDKGET=~/android_sdk/tools/bin/sdkmanager
+    - AVDMAKE=~/android_sdk/tools/bin/avdmanager
+
+before_install:
+  # use sdkmanager to install all the tools
+    $SDKGET "build-tools;29.0.2"
+    $SDKGET "emulator"
+    $SDKGET "platform-tools"
+    $SDKGET "platforms;android-24"
+    $SDKGET "system-images;android-24;default;armeabi-v7a" # Nougat 7.0
+    $SDKGET "system-images;android-26;default;x86" # Orea 8.0
+
+    # use avdmanager to create the virtual devices
+    $AVDMAKE create avd -n Nexus5_7.0_api24 -k "system-images;android-24;default;armeabi-v7a" --device "Nexus 5" # 1920 x 1080
+    $AVDMAKE create avd -n Nexus6P_8.0_api26 -k "system-images;android-26;default;x86" --device "Nexus 6P" # 2560 x 1440
+
 before_script:
   # Emulator management: Create, Start, Wait
 
