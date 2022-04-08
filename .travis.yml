@@ -79,8 +79,8 @@ android:
 before_install:
   - yes | $ANDROID_HOME/tools/bin/sdkmanager --update
   - sdkmanager tools
-  - sdkmanager "system-images;android29;default;x86"
-  - echo no | avdmanager create avd --force -n test -k "system-images;android-29;default;x86"
+  - sdkmanager "system-images;android-29;google_apis;x86"
+  - echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
   - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
 
 before_script:
