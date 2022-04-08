@@ -1,53 +1,3 @@
-#os: linux
-#language: android
-#jdk: openjdk11
-#
-#android:
-#  components:
-#    - tools
-#    - tools
-#    - platform-tools
-#    - build-tools-30.0.2
-#    #- android-30
-#    #- android-31
-#    - android-29
-#    - android-29
-#    #- android-24
-#    #- sys-img-armeabi-v7a-android-24
-#    #- sys-img-
-#    - sys-img-x86-android-29
-#    - extra-android-m2repository
-#    - extra-google-m2repository
-#    - extra-android-support
-#    - extra-google-google_play_services
-##env:
-##  global:
-##    - TARGET_VERSION=29
-##    - ANDROID_API_LEVEL=29
-##    #- ANDROID_ABI=armeabi-v7a
-##    - ANDROID_BUILD_TOOLS_VERSION=30.0.2
-##    - ANDROID_HOME=~/android-sdk
-##    - QEMU_AUDIO_DRV=none
-##    - ANDROID_SDK_ROOT=$ANDROID_HOME
-#
-##before_install:
-##  - touch $HOME/.android/repositories.cfg
-##  - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
-##  - unzip commandlinetools.zip -d $ANDROID_HOME/
-##  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-${TARGET_VERSION}" --sdk_root=$ANDROID_HOME
-##  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" --sdk_root=$ANDROID_HOME
-#
-#before_script:
-#  # Create and start emulator
-#  - android list targets
-#  #- chmod +x gradlew
-#  - echo no | android create avd --force -n test -t android-29 --abi x86
-#  - emulator -avd test -no-window &
-#  - android-wait-for-emulator
-#  - adb shell input keyevent 82 &
-#
-#script: ./gradlew connectedAndroidTest
-
 language: android
 dist: trusty
 android:
@@ -87,7 +37,6 @@ before_script:
   # Emulator management: Create, Start, Wait
   # List available emulator targets
   - android list target
-  - android updated sdk
   # SdkManager related
   - sdkmanager --list
 
