@@ -71,6 +71,11 @@ android:
     # System images needed to run emulator
     #- sys-img-x86-android-29
 
+  licenses:
+    - 'android-.+'
+    - 'mips-.+'
+    - 'google-.+'
+
 before_install:
   - sdkmanager tools
   - sdkmanager "system-images;android29;google_apis;x86"
