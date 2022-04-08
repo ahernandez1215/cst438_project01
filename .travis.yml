@@ -6,6 +6,11 @@ os: linux
 language: android
 dist: trusty
 jdk: openjdk11
+
+env:
+  global:
+    - ADB_INSTALL_TIMEOUT=8
+
 android:
   components:
     # explicitly state required components
@@ -15,11 +20,13 @@ android:
     - build-tools-30.0.2
 
     # The SDK version used by the project
+    - android-31
+    - android-30
     - android-29
 
     # Addons
     - addon
-    - extra
+    - extra-android-m2repository
 
   licenses:
     - 'android-.+'
@@ -39,10 +46,8 @@ before_install:
   - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
-
-
-  # Wait for emulator to start
-  #- bash android-wait-for-emulator
+  - bash android-wait-for-emulator
+  - adb devices
   - adb shell input keyevent 82 &
 
 script: ./gradlew build connectedCheck
