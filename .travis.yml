@@ -2,17 +2,18 @@ os: linux
 language: android
 jdk: openjdk11
 sudo: false
+dist: trusty
+
 
 android:
   components:
-    - tools
-    - platform-tools
-    - android-24
+    #- tools
+    #- platform-tools
     - android-29
     - android-24
     - sys-img-armeabi-v7a-android-24
-    - sys-img-
-    #- sys-img-x86-android-29
+    #- sys-img-
+    - sys-img-x86-android-29
     - extra-android-m2repository
 env:
   global:
@@ -21,6 +22,7 @@ env:
     - ANDROID_ABI=armeabi-v7a
     - ANDROID_BUILD_TOOLS_VERSION=30.0.2
     - ANDROID_HOME=~/android-sdk
+    - QEMU_AUDIO_DRV=none
 
 before_install:
   - touch $HOME/.android/repositories.cfg
@@ -30,10 +32,11 @@ before_install:
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" --sdk_root=$ANDROID_HOME
 
 before_script:
- # Create and start emulator
- - chmod +x gradlew
- - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
- - emulator -avd test -no-skin -no-audio -no-window &
- - android-wait-for-emulator
- - adb shell input keyevent 82 &
+  # Create and start emulator
+  - chmod +x gradlew
+  - echo no | android create avd --force -n test -t android-29 --abi x86
+  - emulator -avd test -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+
 script: ./gradlew connectedAndroidTest
