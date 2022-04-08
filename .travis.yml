@@ -10,6 +10,7 @@ jdk: openjdk11
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
+    - ANDROID_SDK_ROOT=~/
 
 android:
   components:
