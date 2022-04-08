@@ -50,7 +50,8 @@ before_script:
 
   # Emulator Start
   - $ANDROID_HOME/emulator/emulator -avd test -memory 800 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
-  - ls -LR $ANDROID_HOME
+  #- ls -LR $ANDROID_HOME
+  - df -h
 
   - android list target
   #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
