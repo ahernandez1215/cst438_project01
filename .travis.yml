@@ -40,7 +40,7 @@ before_install:
 ##  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
 ##  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
 #  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
-  - cd Android/tools
+  - cd android-sdk/tools
   - mkdir jaxb_lib
   - wget https://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.jar -O jaxb_lib/activation.jar
   - wget https://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-impl/2.3.3/jaxb-impl-2.3.3.jar -O jaxb_lib/jaxb-impl.jar
