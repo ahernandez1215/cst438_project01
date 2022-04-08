@@ -1,7 +1,6 @@
 #os: linux
 #language: android
 #jdk: openjdk11
-#sudo: required
 #
 #android:
 #  components:
@@ -55,11 +54,12 @@ android:
   components:
     # explicitly state required components
     - tools
+    - tools
     - platform-tools
     - build-tools-30.0.2
 
     # The SDK version used by the project
-    - android-29
+    - android-30
 
     # Addons
     - addon
@@ -69,13 +69,16 @@ android:
     # - extra-android-m2repository
 
     # System images needed to run emulators
-    - sys-img-x86-android-29
+    - sys-img-x86-android-30
 
 before_script:
   # Emulator management: Create, Start, Wait
 
+  # List available emulator targets
+  - android list targets
+
   #- echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a -c 100M # use for non x86
-  - echo no | android create avd --force -n test -t android-29 --abi x86 -c 100M
+  - echo no | android create avd --force -n test -t android-30 --abi x86 -c 100M
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
