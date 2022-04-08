@@ -45,7 +45,7 @@ before_install:
 before_script:
   # List available emulator targets
   - android list target
-  - $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list
+  - $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
 
   # Wait for emulator to start
   - android-wait-for-emulator
