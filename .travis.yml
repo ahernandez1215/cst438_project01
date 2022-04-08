@@ -2,7 +2,7 @@
 # https://travis-ci.community/t/add-kvm-support/1406/8
 # https://docs.travis-ci.com/user/languages/android/
 # https://config.travis-ci.com/
-os:linux
+os: linux
 language: android
 dist: trusty
 jdk: openjdk11
