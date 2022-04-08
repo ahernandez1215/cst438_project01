@@ -10,7 +10,7 @@ jdk: openjdk11
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
-    #- ANDROID_SDK_ROOT=~/.android/avd
+    - ANDROID_SDK_ROOT=$ANDROID_HOME
 
 android:
   components:
@@ -50,6 +50,7 @@ before_script:
 
   # Emulator Start
   - $ANDROID_HOME/emulator/emulator -avd test -memory 800 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
+  - ls $ANDROID_HOME
 
   - android list target
   #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
