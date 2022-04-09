@@ -45,7 +45,7 @@ before_install:
 
 before_script:
   - echo $PATH
-  - PATH=$PATH:$ANDROID_HOME/emulator/
+  - PATH=$PATH:$ANDROID_HOME/
   - echo $PATH
 
   # Emulator Creation (x86 no hardware acceleration)
