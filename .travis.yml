@@ -43,12 +43,20 @@ before_install:
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
-  - ls -LR $PWD
-  - ls -LR $ANDROID_HOME
-
-before_script:
+  - export PATH=$PATH:$ANDROID_HOME
+  - export PATH=$PATH:$ANDROID_HOME/build-tools
+  - export PATH=$PATH:$ANDROID_HOME/emulator
+  - export PATH=$PATH:$ANDROID_HOME/platform-tools
+  - export PATH=$PATH:$ANDROID_HOME/tools
+  - export PATH=$PATH:$ANDROID_HOME/platforms
+  - export PATH=$PATH:$ANDROID_HOME/cmdline-tools
+  - export PATH=$PATH:$ANDROID_HOME/system-images
+  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools/bin|$||')
+  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools|$||')
+  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/platform-tools|$||')
   - echo $PATH
 
+before_script:
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
   #- echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
