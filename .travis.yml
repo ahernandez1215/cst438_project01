@@ -26,7 +26,7 @@ android:
 
     # Addons
     - addon
-    - extra-android-m2repository
+    - extra
 
   licenses:
     - 'android-.+'
@@ -40,6 +40,7 @@ before_install:
   - unzip commandlinetools.zip -d $ANDROID_HOME/
   - echo $PATH
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --update --sdk_root=$ANDROID_HOME
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager tools
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
@@ -57,19 +58,20 @@ before_install:
 # - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/platform-tools|$||')
   - echo $PATH
   #sdkmanager --list --verbose
-
-before_script:
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
 
   # Emulator Start
   - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
-  - df -h
+
+before_script:
+
+  #- df -h
   - android list target
   #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
   - emulator -list-avds
 
-  - bash android-wait-for-emulator
+  - android-wait-for-emulator
   - adb devices
   - adb shell input keyevent 82 &
 
