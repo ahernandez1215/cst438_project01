@@ -10,7 +10,7 @@ jdk: openjdk11
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
-    - ANDROID_HOME=~/android-sdk
+    - ANDROID_HOME=~/
     #- ANDROID_SDK_ROOT=~/android-sdk/system-images/android-29
 
 android:
