@@ -61,7 +61,7 @@ before_install:
   - echo $PATH
   - export ANDROID_SDK_ROOT=~/system-images/android-29
   # Emulator Creation (x86 no hardware acceleration)
-  - echo no | avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
+  - echo no | avdmanager create avd --force -n my_avd -k android-29 --abi x86
 
   # Emulator Start
   - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
