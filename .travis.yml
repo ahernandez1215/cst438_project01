@@ -56,7 +56,7 @@ before_install:
 # - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools|$||')
 # - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/platform-tools|$||')
   - echo $PATH
-  - sdkmanager --list --verbose
+  #sdkmanager --list --verbose
 
 before_script:
   # Emulator Creation (x86 no hardware acceleration)
