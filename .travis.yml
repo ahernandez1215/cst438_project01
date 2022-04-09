@@ -45,7 +45,7 @@ before_install:
 
 before_script:
   # Emulator Creation (x86 no hardware acceleration)
-  - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86" --abi x86
+  - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
   #- echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
 
   # Emulator Start
