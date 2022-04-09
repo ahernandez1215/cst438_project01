@@ -11,7 +11,7 @@ env:
   global:
     - ADB_INSTALL_TIMEOUT=8
     - ANDROID_HOME=~/android-sdk
-    - ANDROID_SDK_ROOT=$ANDROID_HOME
+    - ANDROID_SDK_ROOT=~/
 
 android:
   components:
@@ -25,7 +25,7 @@ android:
     - android-29
 
     # Addons
-    - addon
+    - add-on
     - extra
 
   licenses:
@@ -58,7 +58,6 @@ before_install:
 # - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools|$||')
 # - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/platform-tools|$||')
   - echo $PATH
-  #sdkmanager --list --verbose
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
 
@@ -66,10 +65,9 @@ before_install:
   - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
-  - ls -LR $ANDROID_HOME
+  - nano ~/.android/avd/my_avd.ini
+  - ls ~/
   #- ls ~/.android/avd
-  - ls $ANDROID_HOME/emulator/emulator
-  #- df -h
   - android list target
   #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
   - emulator -list-avds
