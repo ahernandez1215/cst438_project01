@@ -39,22 +39,22 @@ before_install:
   - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
   - unzip commandlinetools.zip -d $ANDROID_HOME/
   - echo $PATH
-  - PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --update --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
+  - echo $PWD
+  - echo $ANDROID_HOME
 
 before_script:
   - echo $PATH
-  - sdkmanager tools
-  - echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
-  - emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
+
   # Emulator Creation (x86 no hardware acceleration)
-  #- echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
+  - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
+  #- echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
 
   # Emulator Start
-  #- $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
+  - $ANDROID_HOME/emulator/emulator -avd test -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
   - df -h
   - android list target
   #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
