@@ -43,8 +43,8 @@ before_install:
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
-  - echo $PWD
-  - echo $ANDROID_HOME
+  - ls -LR $PWD
+  - ls -LR $ANDROID_HOME
 
 before_script:
   - echo $PATH
