@@ -11,7 +11,7 @@ env:
   global:
     - ADB_INSTALL_TIMEOUT=8
     - ANDROID_HOME=~/android-sdk
-    - ANDROID_SDK_ROOT=~/
+    - ANDROID_SDK_ROOT=~/android-sdk/system-images
 
 android:
   components:
@@ -65,6 +65,7 @@ before_install:
   - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
+  - ls ~/android-sdk/system-images
   - cat ~/.android/avd/my_avd.ini
   - ls ~/
   #- ls ~/.android/avd
