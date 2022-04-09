@@ -18,14 +18,14 @@ android:
     # explicitly state required components
     - tools
     - tools
-    #- platform-tools
-    #- build-tools-30.0.2
+    - platform-tools
+    - build-tools-30.0.2
 
     # The SDK version used by the project
     - android-29
 
     # Addons
-    #- addon
+    - addon
     - extra-android-m2repository
 
   licenses:
