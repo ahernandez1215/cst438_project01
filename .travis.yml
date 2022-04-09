@@ -11,7 +11,7 @@ env:
   global:
     - ADB_INSTALL_TIMEOUT=8
     - ANDROID_HOME=~/android-sdk
-    - ANDROID_SDK_ROOT=~/android-sdk/platforms/android-29
+    - ANDROID_SDK_ROOT=~/android-sdk/avd
 
 android:
   components:
