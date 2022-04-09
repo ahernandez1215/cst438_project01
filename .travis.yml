@@ -44,6 +44,10 @@ before_install:
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
 
 before_script:
+  - echo $PATH
+  - PATH=$PATH:$ANDROID_HOME/emulator/
+  - echo $PATH
+
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86" -p ~/.android/avd/.
   #- echo no | avdmanager create avd --force -n test -k "system-images;android-29;google_apis;x86"
@@ -54,9 +58,7 @@ before_script:
   - android list target
   #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
   - emulator -list-avds
-  - echo $PATH
-  - PATH=$PATH:$ANDROID_HOME/emulator/
-  - echo $PATH
+
 
   - bash android-wait-for-emulator
   - adb devices
