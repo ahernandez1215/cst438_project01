@@ -52,11 +52,10 @@ before_install:
   - export PATH=$PATH:$ANDROID_HOME/cmdline-tools
   - export PATH=$PATH:$ANDROID_HOME/system-images
   - export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin
-  #  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools/bin|$||')
-#  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools|$||')
-#  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/platform-tools|$||')
+# - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools/bin|$||')
+# - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools|$||')
+# - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/platform-tools|$||')
   - echo $PATH
-  - $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --verbose
   - sdkmanager --list --verbose
 
 before_script:
