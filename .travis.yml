@@ -11,18 +11,18 @@ env:
   global:
     - ADB_INSTALL_TIMEOUT=8
     - ANDROID_HOME=~/android-sdk
-    #- ANDROID_SDK_ROOT=~/android-sdk/avd
+    - ANDROID_SDK_ROOT=~/android-sdk/avd
 
 android:
   components:
     # explicitly state required components
-    #- tools
-    #- tools
+    - tools
+    - tools
     #- platform-tools
     #- build-tools-30.0.2
 
     # The SDK version used by the project
-    #- android-29
+    - android-29
 
     # Addons
     #- addon
