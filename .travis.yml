@@ -60,7 +60,7 @@ before_install:
 
 before_script:
   # Emulator Creation (x86 no hardware acceleration)
-  - android create avd --force -n my_avd -t 2
+  - android create avd --force -n my_avd -t 2 --abi x86
 
   # Emulator Start
   - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
