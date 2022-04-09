@@ -51,9 +51,9 @@ before_install:
   - export PATH=$PATH:$ANDROID_HOME/platforms
   - export PATH=$PATH:$ANDROID_HOME/cmdline-tools
   - export PATH=$PATH:$ANDROID_HOME/system-images
-  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools/bin|$||')
-  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools|$||')
-  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/platform-tools|$||')
+#  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools/bin|$||')
+#  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools|$||')
+#  - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/platform-tools|$||')
   - echo $PATH
 
 before_script:
