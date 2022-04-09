@@ -11,7 +11,7 @@ env:
   global:
     - ADB_INSTALL_TIMEOUT=8
     - ANDROID_HOME=~/android-sdk
-    - ANDROID_SDK_ROOT=$ANDROID_HOME/emulator
+    - ANDROID_SDK_ROOT=~/.android/avd
 
 android:
   components:
@@ -47,6 +47,7 @@ before_install:
   - export PATH=$PATH:$ANDROID_HOME
   - export PATH=$PATH:$ANDROID_HOME/build-tools
   - export PATH=$PATH:$ANDROID_HOME/emulator
+  - export PATH=$PATH:$ANDROID_HOME/emulator/emulator
   - export PATH=$PATH:$ANDROID_HOME/platform-tools
   - export PATH=$PATH:$ANDROID_HOME/tools
   - export PATH=$PATH:$ANDROID_HOME/platforms
@@ -66,7 +67,7 @@ before_install:
 
 before_script:
   - ls ~/.android/avd
-  - ls $ANDROID_HOME/emulator
+  - ls $ANDROID_HOME/emulator/emulator
   #- df -h
   - android list target
   #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
