@@ -65,7 +65,7 @@ before_install:
   - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
-  - nano ~/.android/avd/my_avd.ini
+  - cat ~/.android/avd/my_avd.ini
   - ls ~/
   #- ls ~/.android/avd
   - android list target
