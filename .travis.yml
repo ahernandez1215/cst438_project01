@@ -11,7 +11,7 @@ sudo: required
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
-
+    #- ANDROID_HOME=~/ # may results in broken avd path?
     #- ANDROID_SDK_ROOT=~/android-sdk/system-images/android-29
 
 android:
@@ -61,23 +61,23 @@ before_install:
   - echo $PATH
   #- export ANDROID_SDK_ROOT=~/system-images/android-29
   # Emulator Creation (x86 no hardware acceleration)
-  #- echo no | avdmanager create avd --force -n my_avd -k android-29 --abi x86
+  - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
 
   # Emulator Start
-  #- emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
+  - $ANDROID_HOME/emulator/emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
-#before_script:
-#  - ls ~/system-images/android-29
-#  - cat ~/.android/avd/my_avd.ini
-#  - ls ~/
-#  #- ls ~/.android/avd
-#  - android list target
-#  #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
-#  - emulator -list-avds
-#
-#  - android-wait-for-emulator
-#  - adb devices
-#  - adb shell input keyevent 82 &
+before_script:
+  - ls ~/system-images/android-29
+  - cat ~/.android/avd/my_avd.ini
+  - ls ~/
+  #- ls ~/.android/avd
+  - android list target
+  #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
+  - emulator -list-avds
+
+  - android-wait-for-emulator
+  - adb devices
+  - adb shell input keyevent 82 &
 
 script: ./gradlew build connectedCheck
 
