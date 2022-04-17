@@ -67,9 +67,10 @@ before_install:
   - $ANDROID_HOME/emulator/emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
-  - ls ~/system-images/android-29
-  - cat ~/.android/avd/my_avd.ini
-  - ls ~/
+#  - ls ~/system-images/android-29
+#  - cat ~/.android/avd/my_avd.ini
+#  - ls ~/
+  - ls $ANDROID_HOME
   #- ls ~/.android/avd
   - android list target
   #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
