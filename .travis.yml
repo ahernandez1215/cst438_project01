@@ -38,33 +38,23 @@ before_install:
   # Update SDK manager to work with jdk 11
   - touch $HOME/.android/repositories.cfg
   - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
-  - unzip commandlinetools.zip -d $ANDROID_HOME/
+  - unzip commandlinetools.zip -d $ANDROID_SDK_ROOT
+  - echo $ANDROID_SDK_ROOT
   - echo $PATH
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --update --sdk_root=$ANDROID_HOME
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager tools --sdk_root=$ANDROID_HOME
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
-  - export PATH=$PATH:$ANDROID_HOME
-  - export PATH=$PATH:$ANDROID_HOMEbuild-tools
-  - export PATH=$PATH:$ANDROID_HOMEemulator
-  - export PATH=$PATH:$ANDROID_HOMEemulator/emulator
-  - export PATH=$PATH:$ANDROID_HOMEplatform-tools
-  - export PATH=$PATH:$ANDROID_HOMEtools
-  - export PATH=$PATH:$ANDROID_HOMEplatforms
-  - export PATH=$PATH:$ANDROID_HOMEcmdline-tools
-  - export PATH=$PATH:$ANDROID_HOMEsystem-images
-  - export PATH=$PATH:$ANDROID_HOMEcmdline-tools/bin
-# - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools/bin|$||')
-# - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/tools|$||')
-# - PATH=$(echo $PATH | sed -e 's|:/usr/local/android-sdk/platform-tools|$||')
-  - echo $PATH
-  #- export ANDROID_SDK_ROOT=~/system-images/android-29
+  - yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --update --sdk_root=$ANDROID_SDK_ROOT
+  - yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager tools --sdk_root=$ANDROID_SDK_ROOT
+  - yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager "platforms;android-29" --sdk_root=$ANDROID_SDK_ROOT
+  - yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_SDK_ROOT
+  - yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_SDK_ROOT
+  - echo $ANDROID_SDK_ROOT
+  # Add to PATH
+  - PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin
+
   # Emulator Creation (x86 no hardware acceleration)
-  - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
+  - echo no | $ANDROID_SDK_ROOT/cmdline-tools/bin/avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
 
   # Emulator Start
-  - $ANDROID_HOME/emulator/emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
+  - $ANDROID_SDK_ROOT/emulator/emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
 #  - ls ~/system-images/android-29
