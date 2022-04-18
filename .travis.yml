@@ -38,7 +38,7 @@ before_install:
   # Update SDK manager to work with jdk 11
   - touch $HOME/.android/repositories.cfg
   - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
-  - unzip commandlinetools.zip -d $ANDROID_HOME/
+  - unzip commandlinetools.zip -d $ANDROID_HOME
   - mv $ANDROID_HOME/cmdline-tools/ $ANDROID_HOME/latest/
   - echo $PATH
   - PATH=$ANDROID_HOME/latest/bin:$ANDROID_HOME:$PATH
