@@ -11,8 +11,8 @@ sudo: required
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
-    #- ANDROID_HOME=~/
-    #- ANDROID_SDK_ROOT=~/
+    - ANDROID_HOME=~/
+    - ANDROID_SDK_ROOT=~/
     - ANDROID_AVD_HOME=~/.android/avd
 
 android:
