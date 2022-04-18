@@ -49,7 +49,7 @@ before_install:
   - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
   - ls $ANDROID_HOME
   - ls $ANDROID_SDK_ROOT
-  - $ANDROID_SDK_ROOT=$ANDROID_HOME/
+  - ANDROID_SDK_ROOT=$ANDROID_HOME/
   - PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin
 
   # Emulator Start
