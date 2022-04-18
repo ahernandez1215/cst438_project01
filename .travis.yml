@@ -6,14 +6,13 @@ os: linux
 language: android
 dist: trusty
 jdk: openjdk11
-sudo: required
 
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
     - ANDROID_HOME=~/
-    - ANDROID_SDK_ROOT=~/
-    - ANDROID_AVD_HOME=~/.android/avd
+    #- ANDROID_SDK_ROOT=~/system-images/android-29/google_apis/x86
+    - ANDROID_AVD_HOME=~/.android/avd # CHANGE THIS: use original home directory not new home dir
 
 android:
   components:
@@ -27,7 +26,7 @@ android:
     - android-29
 
     # Addons
-    - add-on
+    #- add-on
     - extra
 
   licenses:
@@ -44,28 +43,21 @@ before_install:
   - PATH=$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME:$PATH
   - echo $PATH
   - yes | sdkmanager --update --sdk_root=$ANDROID_HOME
+  #- yes | sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
+  #- yes | sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
   - yes | sdkmanager tools --sdk_root=$ANDROID_HOME
-  - yes | sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
-  - yes | sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
   - yes | sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
-
-  - ls -R $ANDROID_HOME
 
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
-
   # Emulator Start
   - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
-  - ls $HOME/.android
-  - ls ~/.android/avd
-  #- android list target
   - emulator -verbose -avd my_avd
   - emulator -list-avds
   - sdkmanager --list --sdk_root=$ANDROID_HOME
   - android-wait-for-emulator
-  - adb devices
   - adb shell input keyevent 82 &
 
 script: ./gradlew build connectedCheck
