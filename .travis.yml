@@ -11,8 +11,9 @@ sudo: required
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
-    - ANDROID_HOME=~/ # may results in broken avd path?
-    - ANDROID_SDK_ROOT=~/
+    #- ANDROID_HOME=~/
+    #- ANDROID_SDK_ROOT=~/
+    - ANDROID_AVD_HOME=~/.android/avd
 
 android:
   components:
@@ -41,6 +42,7 @@ before_install:
   - unzip commandlinetools.zip -d $ANDROID_HOME/
   - echo $PATH
   - PATH=$ANDROID_HOME/cmdline-tools/bin:$PATH
+  - echo $PATH
   - yes | sdkmanager --update --sdk_root=$ANDROID_HOME
   - yes | sdkmanager tools --sdk_root=$ANDROID_HOME
   - yes | sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
@@ -48,10 +50,6 @@ before_install:
   - yes | sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
 
   - ls -R $ANDROID_HOME
-  - ls $ANDROID_SDK_ROOT/bin
-  - ls $ANDROID_SDK_ROOT
-  - ls $ANDROID_HOME/
-  #- PATH=$ANDROID_HOME/cmdline-tools/bin:$PATH
 
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
@@ -60,13 +58,9 @@ before_install:
   - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
 
 before_script:
-#  - ls ~/system-images/android-29
-#  - cat ~/.android/avd/my_avd.ini
-#  - ls ~/
-  - ls $ANDROID_HOME
-  #- ls ~/.android/avd
+  - ls $HOME/.android
+  - ls ~/.android/avd
   - android list target
-  #- $ANDROID_HOME/cmdline-tools/bin/sdkmanager --list --sdk_root=$ANDROID_HOME
   - emulator -list-avds
   - sdkmanager --list --sdk_root=$ANDROID_HOME
   - android-wait-for-emulator
