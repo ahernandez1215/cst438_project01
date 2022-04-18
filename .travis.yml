@@ -61,7 +61,7 @@ before_script:
   - ls $HOME/.android
   - ls ~/.android/avd
   #- android list target
-  - emulator -verbose
+  - emulator -verbose -avd my_avd
   - emulator -list-avds
   - sdkmanager --list --sdk_root=$ANDROID_HOME
   - android-wait-for-emulator
