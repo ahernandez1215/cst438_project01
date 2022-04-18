@@ -11,7 +11,7 @@ env:
   global:
     - ADB_INSTALL_TIMEOUT=8
     - ANDROID_HOME=${HOME}
-    - ANDROID_SDK_ROOT=${HOME}
+    - ANDROID_SDK_ROOT=${HOME}/cmdline-tools
     - ANDROID_AVD_HOME=~/.android/avd # CHANGE THIS: use original home directory not new home dir
 
 android:
@@ -49,13 +49,14 @@ before_install:
   - yes | sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
 
   # Emulator Creation (x86 no hardware acceleration)
-  - echo no | avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
+  - echo no | avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
   # Emulator Start
-  - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window &
+  - emulator -avd my_avd -memory 1500 -no-accel -gpu swiftshader -skin 720x1280 -camera-back none -camera-front none -no-boot-anim -no-window & --sdk_root=$ANDROID_HOME
 
 before_script:
-  - emulator -verbose -avd my_avd
-  - emulator -list-avds
+  - ls -R $HOME
+  - emulator -verbose -avd my_avd --sdk_root=$ANDROID_HOME
+  - emulator -list-avds --sdk_root=$ANDROID_HOME
   - sdkmanager --list --sdk_root=$ANDROID_HOME
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
