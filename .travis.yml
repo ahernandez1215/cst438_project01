@@ -11,7 +11,7 @@ sudo: required
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
-    #- ANDROID_HOME=~/ # may results in broken avd path?
+    - ANDROID_HOME=~/ # may results in broken avd path?
     - ANDROID_SDK_ROOT=~/
 
 android:
@@ -48,8 +48,8 @@ before_install:
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
   - ls $ANDROID_HOME
+  - ls $ANDROID_SDK_ROOT/bin
   - ls $ANDROID_SDK_ROOT
-  - ANDROID_SDK_ROOT=$ANDROID_HOME/
   - PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin
 
   # Emulator Start
