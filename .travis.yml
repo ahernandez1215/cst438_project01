@@ -10,7 +10,7 @@ jdk: openjdk11
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
-    - ANDROID_HOME=$~/
+    - ANDROID_HOME=~/
     #- ANDROID_SDK_ROOT=${HOME}/cmdline-tools
     - ANDROID_AVD_HOME=~/.android/avd # CHANGE THIS: use original home directory not new home dir
 
