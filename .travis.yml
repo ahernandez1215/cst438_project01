@@ -41,7 +41,7 @@ before_install:
   - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
   - unzip commandlinetools.zip -d $ANDROID_HOME/
   - echo $PATH
-  - PATH=$ANDROID_HOME/cmdline-tools/bin:$PATH
+  - PATH=$ANDROID_HOMEcmdline-tools/bin:$ANDROID_HOME:$PATH
   - echo $PATH
   - yes | sdkmanager --update --sdk_root=$ANDROID_HOME
   - yes | sdkmanager tools --sdk_root=$ANDROID_HOME
@@ -60,7 +60,8 @@ before_install:
 before_script:
   - ls $HOME/.android
   - ls ~/.android/avd
-  - android list target
+  #- android list target
+  - emulator -verbose
   - emulator -list-avds
   - sdkmanager --list --sdk_root=$ANDROID_HOME
   - android-wait-for-emulator
