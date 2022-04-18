@@ -12,7 +12,7 @@ env:
   global:
     - ADB_INSTALL_TIMEOUT=8
     #- ANDROID_HOME=~/ # may results in broken avd path?
-    #- ANDROID_SDK_ROOT=~/android-sdk/system-images/android-29
+    - ANDROID_SDK_ROOT=~/
 
 android:
   components:
