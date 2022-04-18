@@ -47,9 +47,9 @@ before_install:
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | $ANDROID_HOME/cmdline-tools/bin/avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
-  - $ANDROID_SDK_ROOT=$ANDROID_HOME
   - ls $ANDROID_HOME
   - ls $ANDROID_SDK_ROOT
+  - $ANDROID_SDK_ROOT=$ANDROID_HOME/
   - PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin
 
   # Emulator Start
