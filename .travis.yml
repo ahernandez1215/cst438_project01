@@ -10,8 +10,8 @@ jdk: openjdk11
 env:
   global:
     - ADB_INSTALL_TIMEOUT=8
-    - ANDROID_HOME=~/
-    - ANDROID_SDK_ROOT=~/
+    - ANDROID_HOME=~/android-sdk/cmdline-tools/
+    - ANDROID_SDK_ROOT=~/android-sdk/
     - ANDROID_AVD_HOME=~/.android/avd # CHANGE THIS: use original home directory not new home dir
 
 android:
@@ -39,15 +39,16 @@ before_install:
   - touch $HOME/.android/repositories.cfg
   - wget "https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip" -O commandlinetools.zip
   - unzip commandlinetools.zip -d $ANDROID_HOME/
+  - mv $ANDROID_HOME/cmdline-tools/ $ANDROID_HOME/latest/
   - echo $PATH
-  - PATH=$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME:$PATH
+  - PATH=$ANDROID_HOME/latest/bin:$ANDROID_HOME:$PATH
   - echo $PATH
-  - yes | sdkmanager --update --sdk_root=$ANDROID_HOME
-  - yes | sdkmanager "platforms;android-29" --sdk_root=$ANDROID_HOME
-  - yes | sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_HOME
-  - yes | sdkmanager tools --sdk_root=$ANDROID_HOME
-  - yes | sdkmanager tools --sdk_root=$ANDROID_HOME
-  - yes | sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_HOME
+  - yes | sdkmanager --update --sdk_root=$ANDROID_SDK_ROOT
+  - yes | sdkmanager "platforms;android-29" --sdk_root=$ANDROID_SDK_ROOT
+  - yes | sdkmanager "build-tools;30.0.2" --sdk_root=$ANDROID_SDK_ROOT
+  - yes | sdkmanager tools --sdk_root=$ANDROID_SDK_ROOT
+  - yes | sdkmanager tools --sdk_root=$ANDROID_SDK_ROOT
+  - yes | sdkmanager "system-images;android-29;google_apis;x86" --sdk_root=$ANDROID_SDK_ROOT
 
   # Emulator Creation (x86 no hardware acceleration)
   - echo no | avdmanager create avd --force -n my_avd -k "system-images;android-29;google_apis;x86"
@@ -58,7 +59,7 @@ before_script:
   - ls -R $HOME
   - emulator -verbose -avd my_avd
   - emulator -list-avds
-  - sdkmanager --list --sdk_root=$ANDROID_HOME
+  - sdkmanager --list --sdk_root=$ANDROID_SDK_ROOT
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
